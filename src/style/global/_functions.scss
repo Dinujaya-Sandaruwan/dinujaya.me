@@ -1,0 +1,9 @@
+$baseFontSize: 16px; // Define your base font size here
+
+@function pxToRem($pixels) {
+  @return #{$pixels / $baseFontSize}rem;
+}
+
+@function pxToEm($pixels, $context) {
+  @return #{$pixels / $context}em;
+}
