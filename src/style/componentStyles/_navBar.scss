@@ -1,0 +1,133 @@
+.mainNav {
+  &__homeIcon {
+    color: var(--white);
+    font-weight: $light;
+
+    @extend .flexCenter;
+
+    width: 150px;
+    height: 100%;
+
+    *:nth-child(1) {
+      font-size: 33px;
+    }
+    * {
+      font-size: rem(20);
+      margin-right: 5px;
+    }
+  }
+
+  &__topMenu {
+    min-width: 350px;
+    height: 40px;
+    background-color: var(--itemBg);
+    border: 2px solid var(--border);
+    display: flex;
+    gap: 10px;
+    padding: 3px;
+    border-radius: 5px;
+
+    @media (max-width: 980px) {
+      display: none;
+    }
+
+    .menuItem {
+      @extend .flexCenter;
+
+      font-size: rem(14);
+      color: var(--grayText);
+      padding: 5px 20px;
+      border-radius: 5px;
+
+      transition-duration: 300ms;
+      cursor: pointer;
+    }
+
+    .active {
+      background-color: var(--navLabelBg);
+      color: var(--white);
+    }
+
+    .menuItem:hover {
+      @extend .active;
+    }
+
+    .menuAlat {
+      @extend .active;
+      @extend .flexCenter;
+      margin-left: 5px;
+      width: 35px;
+      height: 25px;
+      border-radius: 10px;
+    }
+  }
+
+  &__rightSide {
+    color: var(--white);
+    @extend .flexCenter;
+    gap: 10px;
+
+    .notificationIcon {
+      @extend .flexCenter;
+
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+
+      background-color: var(--itemBg);
+      font-size: rem(20);
+
+      @media (max-width: 1015px) {
+        display: none;
+      }
+    }
+
+    .name {
+      margin-left: 30px;
+      // font-weight: $medium;
+    }
+
+    .userAvatarDiv {
+      @extend .flexCenter;
+      position: relative;
+
+      .userAvatar {
+        width: 45px;
+        border-radius: 50%;
+        margin-right: 20px;
+      }
+    }
+
+    .userAvatarDiv:after {
+      content: "";
+      display: block;
+      width: 15px;
+      height: 15px;
+      background-color: var(--activeGreen);
+
+      position: absolute;
+      border-radius: 50%;
+      bottom: 1px;
+      right: 18px;
+    }
+  }
+
+  &__signInBtn {
+    @extend .flexCenter;
+
+    width: 90px;
+    height: 35px;
+    border-radius: 20px;
+    margin-right: 20px;
+    cursor: pointer;
+
+    font-weight: $medium;
+    background-color: var(--white);
+    color: var(--itemBg);
+    transition-duration: 300ms;
+  }
+
+  &__signInBtn:hover {
+    transform: scale(1.05);
+  }
+}

@@ -1,0 +1,20 @@
+.flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.outline {
+  outline: 1px solid red;
+}
+
+.flexAlign {
+  display: flex;
+  align-items: center;
+}
+
+.gridCenter {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
