@@ -18,3 +18,12 @@
   align-items: center;
   justify-items: center;
 }
+
+.alat {
+  color: var(--white);
+  font-size: rem(12);
+  background-color: var(--itemBg);
+  padding: 5px 10px;
+
+  border-radius: 10px;
+}
