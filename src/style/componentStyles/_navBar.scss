@@ -90,6 +90,7 @@
     .userAvatarDiv {
       @extend .flexCenter;
       position: relative;
+      margin-right: 10px;
 
       .userAvatar {
         width: 45px;

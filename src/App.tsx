@@ -5,6 +5,7 @@ import HomeIcon from "./components/HomeIcon";
 import MainLogo from "./components/MainLogo";
 
 import NavProfile from "./components/NavProfile";
+import Post from "./components/Post";
 import Search from "./components/Search";
 import SideMenu from "./components/SideMenu";
 // import SignInBtn from "./components/SignInBtn";
@@ -30,6 +31,7 @@ function App() {
       </aside>
       <div className="main">
         <FakeInputForm />
+        <Post />
       </div>
       <aside className="rightSide"></aside>
     </main>
