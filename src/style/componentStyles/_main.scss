@@ -1,0 +1,94 @@
+.main {
+  &__fakeInputForm {
+    width: clamp(300px, 85%, 1000px);
+    // height: 150px;
+    background-color: var(--component-background);
+    border: 2px solid var(--border);
+
+    margin-top: 40px;
+    padding: 15px;
+
+    .topSide {
+      @extend .flexAlign;
+      img {
+        width: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
+      input {
+        width: calc(100% - 50px);
+        padding: 15px;
+        border-radius: 20px;
+        border: none;
+        background-color: var(--itemBg);
+        font-size: rem(15);
+        color: var(--grayText);
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
+    .bottumSide {
+      @extend .flexAlign;
+      justify-content: space-between;
+      margin-top: 25px;
+
+      @media (max-width: 630px) {
+        justify-content: end;
+      }
+
+      .icons {
+        color: var(--grayText);
+        display: flex;
+        gap: 15px;
+        font-size: rem(30);
+
+        @media (max-width: 630px) {
+          display: none;
+        }
+      }
+
+      .buttons {
+        @extend .flexAlign;
+        gap: 10px;
+        button {
+          width: 100px;
+          height: 40px;
+          border: none;
+          font-size: rem(16);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          cursor: pointer;
+          transition-duration: 300ms;
+        }
+
+        .draft {
+          background: transparent;
+          color: var(--grayText);
+
+          *:nth-child(1) {
+            margin-right: 10px;
+          }
+        }
+
+        .draft:hover {
+          color: var(--white);
+        }
+
+        .post {
+          background-color: var(--body-background);
+          color: var(--white);
+          border: 2px solid var(--border);
+          border-radius: 10px;
+        }
+        .post:hover {
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
+}

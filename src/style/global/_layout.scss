@@ -43,15 +43,20 @@ main {
     grid-area: main;
     background-color: var(--body-background);
 
-    width: calc(100vw - 650px);
+    width: calc(100vw - 750px);
     min-height: calc(100vh - 75px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .rightSide {
     grid-area: right;
-    width: 300px;
+    width: 400px;
     min-height: calc(100vh - 75px);
 
     background-color: var(--body-background);
+    background-color: lightblue;
   }
 
   @media (max-width: 1350px) {
@@ -60,11 +65,11 @@ main {
     }
 
     .main {
-      width: calc(100vw - 400px);
+      width: calc(100vw - 500px);
     }
   }
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1250px) {
     .rightSide {
       display: none;
     }

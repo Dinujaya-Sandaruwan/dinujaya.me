@@ -1,5 +1,6 @@
 import Community from "./components/Community";
 import Events from "./components/Events";
+import FakeInputForm from "./components/FakeInputForm";
 import HomeIcon from "./components/HomeIcon";
 import MainLogo from "./components/MainLogo";
 
@@ -27,7 +28,9 @@ function App() {
         <Community />
         <Events />
       </aside>
-      <div className="main"></div>
+      <div className="main">
+        <FakeInputForm />
+      </div>
       <aside className="rightSide"></aside>
     </main>
   );
