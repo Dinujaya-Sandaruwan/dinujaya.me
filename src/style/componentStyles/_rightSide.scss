@@ -1,0 +1,160 @@
+.rightSide {
+  &__trending {
+    width: 330px;
+    background-color: var(--component-background);
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+
+    .trendingNav {
+      @extend .flexAlign;
+      justify-content: space-between;
+      color: var(--white);
+      margin-bottom: 15px;
+
+      *:nth-child(2) {
+        font-size: rem(25);
+      }
+    }
+
+    .trendingItem {
+      @extend .flexAlign;
+      justify-content: space-between;
+      margin-bottom: 15px;
+
+      //   &:last-child {
+      //     margin-bottom: 0;
+      //   }
+
+      .trendingLeft {
+        h3 {
+          color: var(--white);
+          font-size: rem(15);
+          margin-bottom: 3px;
+          font-weight: $medium;
+        }
+        p {
+          color: var(--grayText);
+          font-size: rem(14);
+        }
+      }
+    }
+
+    .trendingSlat {
+      @extend .alat;
+    }
+
+    .trendingFooter {
+      text-align: center;
+      color: var(--logoBlue);
+      font-weight: $medium;
+      cursor: pointer;
+    }
+  }
+
+  &__advertisement {
+    margin-top: 50px;
+    width: 330px;
+    background-color: var(--component-background);
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+    }
+
+    .addText {
+      padding: 20px;
+
+      h3 {
+        color: var(--white);
+        font-size: rem(17);
+        margin-bottom: 3px;
+        font-weight: $medium;
+      }
+      p {
+        color: var(--grayText);
+        font-size: rem(13);
+        margin-top: 5px;
+        // text-align: justify;
+      }
+
+      .hireMe {
+        width: 100%;
+        height: 40px;
+        color: var(--white);
+        background-color: var(--body-background);
+        border: none;
+        border: 2px solid var(--border);
+
+        margin-top: 20px;
+        cursor: pointer;
+        border-radius: 10px;
+
+        @extend .flexCenter;
+        gap: 4px;
+
+        * {
+          font-size: rem(16);
+        }
+      }
+
+      .hireMe:focus,
+      .hireMe:active {
+        border: 2px solid var(--border);
+      }
+    }
+  }
+
+  &__myFriends {
+    margin-top: 50px;
+    width: 330px;
+    background-color: var(--component-background);
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+
+    position: sticky;
+    top: 100px;
+
+    .myFriendsNav {
+      @extend .flexAlign;
+      justify-content: space-between;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+
+    .myFriendsList {
+      @extend .flexAlign;
+      justify-content: space-between;
+
+      margin: 15px 0;
+
+      .friendsLeftSide {
+        @extend .flexAlign;
+        gap: 10px;
+        img {
+          width: 40px;
+          border-radius: 50%;
+        }
+
+        div {
+          h4 {
+            color: var(--white);
+            font-size: rem(15);
+            font-weight: $medium;
+          }
+          p {
+            color: var(--grayText);
+            font-size: rem(14);
+          }
+        }
+      }
+
+      .friendsAlat {
+        @extend .alat;
+      }
+    }
+  }
+}
