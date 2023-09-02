@@ -8,6 +8,7 @@ import MyFriends from "./components/MyFriends";
 
 import NavProfile from "./components/NavProfile";
 import Post from "./components/Post";
+import RealInputForm from "./components/RealInputForm";
 import Search from "./components/Search";
 import SideMenu from "./components/SideMenu";
 // import SignInBtn from "./components/SignInBtn";
@@ -15,8 +16,10 @@ import TopMenu from "./components/TopMenu";
 import Trending from "./components/Trending";
 
 function App() {
+  const upload = false;
   return (
     <main>
+      {upload && <RealInputForm />}
       <nav className="mainNav">
         <div className="navLeft">
           <HomeIcon />

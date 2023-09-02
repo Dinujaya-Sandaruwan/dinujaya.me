@@ -1,0 +1,76 @@
+.realInputForm {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba($color: #000000, $alpha: 0.5);
+  z-index: 1000;
+
+  .inputFormDiv {
+    width: clamp(300px, 85%, 600px);
+    background-color: var(--body-background);
+    margin: 100px auto;
+    border-radius: 10px;
+    border: 2px solid var(--border);
+    padding: 20px;
+
+    textarea {
+      width: 100%;
+      height: 150px;
+      background-color: var(--component-background);
+      border: none;
+      padding: 10px;
+      color: var(--grayText);
+      margin-top: 20px;
+      resize: none;
+      border: 2px solid var(--border);
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    label {
+      color: var(--white);
+      font-size: rem(18);
+      font-weight: $bold;
+    }
+
+    .uploadImages {
+      margin-top: 20px;
+      height: 100px;
+
+      border: 3px dashed var(--grayText);
+      border-radius: 10px;
+
+      @extend .flexCenter;
+      flex-direction: column;
+      color: var(--grayText);
+      font-size: rem(40);
+
+      p {
+        font-size: rem(17);
+      }
+    }
+
+    .uploadedCount {
+      color: var(--white);
+      font-size: rem(15);
+      margin-top: 10px;
+
+      @extend .flexAlign;
+      gap: 3px;
+      color: var(--deleteRed);
+    }
+
+    .formSubmitBtn {
+      margin-top: 20px;
+      width: 100%;
+      height: 40px;
+      background-color: var(--body-background);
+      border: 2px solid var(--border);
+      color: var(--white);
+    }
+  }
+}
