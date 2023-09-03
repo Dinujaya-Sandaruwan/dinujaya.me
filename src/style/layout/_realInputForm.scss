@@ -15,6 +15,11 @@
     border: 2px solid var(--border);
     padding: 20px;
 
+    @media (max-width: 600px) {
+      margin: 10px auto;
+      overflow-y: scroll;
+    }
+
     textarea {
       width: 100%;
       height: 150px;
@@ -25,6 +30,9 @@
       margin-top: 20px;
       resize: none;
       border: 2px solid var(--border);
+      border-radius: 10px;
+
+      margin-bottom: 10px;
 
       &:focus {
         outline: none;
@@ -37,9 +45,54 @@
       font-weight: $bold;
     }
 
+    .feelings {
+      margin-top: 10px;
+      width: 100%;
+
+      @extend .flexCenter;
+      gap: 15px;
+      flex-wrap: wrap;
+
+      padding: 10px;
+      color: var(--grayText);
+      border: 2px solid var(--border);
+      border-radius: 10px;
+
+      @media (max-width: 600px) {
+        gap: 5px;
+      }
+
+      .oneFeeling {
+        padding: 10px;
+        font-size: rem(25);
+        background-color: var(--component-background);
+        border-radius: 10px;
+        border: 2px solid var(--border);
+        transition-duration: 100ms;
+
+        &:hover {
+          transform: scale(1.1);
+          cursor: pointer;
+        }
+
+        @media (max-width: 600px) {
+          font-size: rem(10);
+          border-radius: 5px;
+          padding: 5px;
+        }
+      }
+    }
+
+    .oneFeelingSelected {
+      color: var(--white);
+      margin-top: 10px;
+      font-size: rem(12);
+    }
+
     .uploadImages {
       margin-top: 20px;
       height: 100px;
+      position: relative;
 
       border: 3px dashed var(--grayText);
       border-radius: 10px;
@@ -52,6 +105,15 @@
       p {
         font-size: rem(17);
       }
+
+      .uploadFiles {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        opacity: 0;
+      }
     }
 
     .uploadedCount {
@@ -62,6 +124,7 @@
       @extend .flexAlign;
       gap: 3px;
       color: var(--deleteRed);
+      cursor: pointer;
     }
 
     .formSubmitBtn {
@@ -71,6 +134,7 @@
       background-color: var(--body-background);
       border: 2px solid var(--border);
       color: var(--white);
+      cursor: pointer;
     }
   }
 }

@@ -29,7 +29,7 @@ const Post = () => {
                 <BsClock />
                 2022/10/05
               </span>
-              <span className="vanue">MERN Developers</span>
+              <span className="vanue">Feeling 😃</span>
             </p>
           </div>
         </div>

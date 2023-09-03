@@ -16,13 +16,14 @@ import TopMenu from "./components/TopMenu";
 import Trending from "./components/Trending";
 
 import useAuthStore from "./global/authStore";
+import useDisplayForm from "./global/displayFormStore";
 
 function App() {
-  const upload = false;
+  const { displayForm } = useDisplayForm();
   const { userName } = useAuthStore();
   return (
     <main>
-      {upload && <RealInputForm />}
+      {displayForm && <RealInputForm />}
       <nav className="mainNav">
         <div className="navLeft">
           <HomeIcon />
@@ -40,6 +41,7 @@ function App() {
       </aside>
       <div className="main">
         <FakeInputForm />
+
         <Post />
         <Post />
       </div>

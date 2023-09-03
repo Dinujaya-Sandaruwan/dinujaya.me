@@ -4,11 +4,13 @@ import { BsPencilSquare } from "react-icons/bs";
 import { CiLocationOn, CiFaceSmile } from "react-icons/ci";
 import avatar from "../assets/avatar.jpg";
 import useAuthStore from "../global/authStore";
+import useDisplayForm from "../global/displayFormStore";
 
 const FakeInputForm = () => {
+  const { setDisplayForm } = useDisplayForm();
   const { photoURL } = useAuthStore();
   return (
-    <div className="main__fakeInputForm">
+    <div className="main__fakeInputForm" onClick={() => setDisplayForm(true)}>
       <div className="topSide">
         <img
           src={photoURL == "" ? avatar : photoURL}

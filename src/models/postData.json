@@ -1,0 +1,22 @@
+{
+  "postId": "1",
+  "userName": "Heshani Mahinsala",
+  "userPhotoURL": "https://firebasestorage.googleapis.com/v0/b/instagram-clone-1e1e9.appspot.com/o/Profile%20Images%2Fheshani.jpg?alt=media&token=3b4b2b1a-4b0a-4b0a-9b0a-4b0a4b0a4b0a",
+  "userId": "1",
+  "date": "2020-10-10",
+  "feeling": "😃",
+  "caption": "This is my Third post",
+  "postPhotoURL": [
+    {
+      "original": "https://picsum.photos/id/1018/1000/600/"
+    }
+  ],
+  "likes": 0,
+  "comments": [
+    {
+      "userName": "Heshani Mahinsala",
+      "userPhotoURL": "https://firebasestorage.googleapis.com/v0/b/instagram-clone-1e1e9.appspot.com/o/Profile%20Images%2Fheshani.jpg?alt=media&token=3b4b2b1a-4b0a-4b0a-9b0a-4b0a4b0a4b0a",
+      "comment": "This is my first comment"
+    }
+  ]
+}

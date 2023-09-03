@@ -6,7 +6,7 @@ import useAuthStore from "../global/authStore";
 import { useEffect } from "react";
 
 const SignInBtn = () => {
-  const { setUserName, setPhotoURL } = useAuthStore();
+  const { setUserName, setPhotoURL, setUserId } = useAuthStore();
 
   const signInWithGoogle = async () => {
     try {
@@ -22,6 +22,9 @@ const SignInBtn = () => {
     if (auth.currentUser?.displayName) {
       setUserName(auth.currentUser?.displayName);
     }
+    if (auth.currentUser?.uid) {
+      setUserId(auth.currentUser?.uid);
+    }
   };
 
   useEffect(() => {
@@ -31,6 +34,10 @@ const SignInBtn = () => {
       }
       if (currentUser?.photoURL) {
         setPhotoURL(currentUser?.photoURL);
+      }
+
+      if (currentUser?.uid) {
+        setUserId(currentUser?.uid);
       }
     });
 
