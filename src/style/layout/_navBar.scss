@@ -114,21 +114,48 @@
   }
 
   &__signInBtn {
-    @extend .flexCenter;
+    @extend .flexAlign;
+    gap: 15px;
+    .signInNotifications {
+      @extend .flexAlign;
 
-    width: 90px;
-    height: 35px;
-    border-radius: 20px;
-    margin-right: 20px;
-    cursor: pointer;
+      .notificationIcon {
+        @extend .flexCenter;
+        color: var(--white);
 
-    font-weight: $medium;
-    background-color: var(--white);
-    color: var(--itemBg);
-    transition-duration: 300ms;
-  }
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
 
-  &__signInBtn:hover {
-    transform: scale(1.05);
+        background-color: var(--itemBg);
+        font-size: rem(20);
+
+        @media (max-width: 1015px) {
+          display: none;
+        }
+      }
+    }
+
+    .signInBtn {
+      @extend .flexCenter;
+
+      width: 90px;
+      height: 35px;
+      border-radius: 20px;
+      margin-right: 40px;
+      cursor: pointer;
+
+      font-weight: $bold;
+      background-color: var(--white);
+      color: var(--itemBg);
+      transition-duration: 300ms;
+
+      border: none;
+
+      &:hover {
+        transform: scale(1.05);
+        // font-weight: $bold;
+      }
+    }
   }
 }

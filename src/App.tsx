@@ -11,12 +11,15 @@ import Post from "./components/Post";
 import RealInputForm from "./components/RealInputForm";
 import Search from "./components/Search";
 import SideMenu from "./components/SideMenu";
-// import SignInBtn from "./components/SignInBtn";
+import SignInBtn from "./components/SignInBtn";
 import TopMenu from "./components/TopMenu";
 import Trending from "./components/Trending";
 
+import useAuthStore from "./global/authStore";
+
 function App() {
   const upload = false;
+  const { userName } = useAuthStore();
   return (
     <main>
       {upload && <RealInputForm />}
@@ -25,7 +28,7 @@ function App() {
           <HomeIcon />
           <TopMenu />
         </div>
-        <NavProfile />
+        {userName == "" ? <SignInBtn /> : <NavProfile />}
       </nav>
       <aside className="leftSide">
         <MainLogo />

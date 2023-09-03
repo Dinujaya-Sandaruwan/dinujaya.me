@@ -1,15 +1,20 @@
 import { PiCameraLight, PiImageLight } from "react-icons/pi";
 import { GiPaperClip } from "react-icons/gi";
 import { BsPencilSquare } from "react-icons/bs";
-import { BiPen } from "react-icons/bi";
 import { CiLocationOn, CiFaceSmile } from "react-icons/ci";
 import avatar from "../assets/avatar.jpg";
+import useAuthStore from "../global/authStore";
 
 const FakeInputForm = () => {
+  const { photoURL } = useAuthStore();
   return (
     <div className="main__fakeInputForm">
       <div className="topSide">
-        <img src={avatar} alt="" className="avatar" />
+        <img
+          src={photoURL == "" ? avatar : photoURL}
+          alt=""
+          className="avatar"
+        />
         <input type="text" placeholder="What's on your mind?" />
       </div>
       <div className="bottumSide">

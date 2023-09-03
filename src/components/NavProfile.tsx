@@ -1,7 +1,18 @@
 import { AiFillMessage, AiFillNotification } from "react-icons/ai";
-import avatar from "../assets/avatar.jpg";
+import useAuthStore from "../global/authStore";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase/config";
+// import avatar from "../assets/avatar.jpg";
 
 const NavProfile = () => {
+  const { userName, photoURL } = useAuthStore();
+  const { setUserName } = useAuthStore();
+
+  const handleSignOut = () => {
+    signOut(auth);
+    setUserName("");
+    window.location.reload();
+  };
   return (
     <div className="mainNav__rightSide">
       <span className="notificationIcon">
@@ -10,9 +21,9 @@ const NavProfile = () => {
       <span className="notificationIcon">
         <AiFillNotification />
       </span>
-      <p className="name">Dinujaya S</p>
-      <div className="userAvatarDiv">
-        <img className="userAvatar" src={avatar} alt="User Avatar" />
+      <p className="name">{userName.split(" ")[0]}</p>
+      <div className="userAvatarDiv" onClick={handleSignOut}>
+        <img className="userAvatar" src={photoURL || ""} alt="User Avatar" />
       </div>
     </div>
   );
