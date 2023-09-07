@@ -4,6 +4,7 @@
     // height: 150px;
     background-color: var(--component-background);
     border: 2px solid var(--border);
+    border-radius: 10px;
 
     margin-top: 40px;
     padding: 15px;
@@ -96,6 +97,7 @@
     width: clamp(300px, 85%, 1000px);
     background-color: var(--component-background);
     border: 2px solid var(--border);
+    border-radius: 10px;
 
     margin-top: 20px;
     padding: 15px;
