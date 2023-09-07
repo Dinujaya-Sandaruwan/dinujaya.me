@@ -4,32 +4,30 @@ import { BsBookmarkCheck, BsClock, BsThreeDotsVertical } from "react-icons/bs";
 import ImageGallery from "react-image-gallery";
 import { PiShareDuotone } from "react-icons/pi";
 import { FaChevronDown } from "react-icons/fa";
+import { Posts } from "../interfaces/postFaces";
 
-const Post = () => {
-  const images = [
-    {
-      original: "https://picsum.photos/id/1018/1000/600/",
-    },
-    {
-      original: "https://picsum.photos/id/1015/1000/600/",
-    },
-    {
-      original: "https://picsum.photos/id/1019/1000/600/",
-    },
-  ];
+const Post = ({
+  userName,
+  userPhotoURL,
+  date,
+  feeling,
+  caption,
+  postPhotoURL,
+  likes,
+}: Posts) => {
   return (
     <div className="main__post">
       <div className="postAccount">
         <div className="mainRight">
-          <img src={avatar} alt="" />
+          <img src={userPhotoURL} alt="" />
           <div className="name">
-            <h3>Dinujaya Sandaruwan</h3>
+            <h3>{userName}</h3>
             <p className="tagLine">
               <span className="time">
                 <BsClock />
-                2022/10/05
+                {date}
               </span>
-              <span className="vanue">Feeling 😃</span>
+              <span className="vanue">Feeling {feeling}</span>
             </p>
           </div>
         </div>
@@ -38,21 +36,21 @@ const Post = () => {
           <BsThreeDotsVertical />
         </div>
       </div>
-      <div className="postCaption">
-        What is the reson guys yesterday I uploaded same kind of content the
-        approved it but today they rejected it I tried to upload they sey we no
-        longer accept this type of content
-      </div>
+      <div className="postCaption">{caption}</div>
 
       <div className="postImages">
-        <ImageGallery items={images} showThumbnails={false} autoPlay={true} />
+        <ImageGallery
+          items={postPhotoURL}
+          showThumbnails={false}
+          autoPlay={true}
+        />
       </div>
 
       <div className="postButtons">
         <div className="like">
           <AiFillLike />
           <span>Like</span>
-          <span className="pstAlat">12</span>
+          <span className="pstAlat">{likes}</span>
         </div>
         <div className="comment">
           <AiOutlineComment />

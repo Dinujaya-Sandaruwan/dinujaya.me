@@ -64,7 +64,8 @@ const RealInputForm = () => {
       const postDocRef = doc(postCollectionRef, docID);
       await setDoc(postDocRef, postData);
 
-      console.log("Post data successfully uploaded to Firestore");
+      // console.log("Post data successfully uploaded to Firestore");
+      setDisplayForm(false);
     } catch (error) {
       console.error("Error uploading post data:", error);
     } finally {

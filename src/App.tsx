@@ -1,3 +1,5 @@
+import { collection, onSnapshot } from "firebase/firestore";
+import { useEffect, useState } from "react";
 import Advertisement from "./components/Advertisement";
 import Community from "./components/Community";
 import Events from "./components/Events";
@@ -14,13 +16,38 @@ import SideMenu from "./components/SideMenu";
 import SignInBtn from "./components/SignInBtn";
 import TopMenu from "./components/TopMenu";
 import Trending from "./components/Trending";
+import { db } from "./firebase/config";
 
 import useAuthStore from "./global/authStore";
 import useDisplayForm from "./global/displayFormStore";
+import { Posts } from "./interfaces/postFaces";
 
 function App() {
   const { displayForm } = useDisplayForm();
   const { userName } = useAuthStore();
+
+  const [posts, setposts] = useState([] as Posts[]);
+  const postCollectionRef = collection(db, "posts");
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(postCollectionRef, (snapshot) => {
+      const data = snapshot.docs.map((doc) => ({
+        postId: doc.id,
+        userName: doc.data().userName,
+        userPhotoURL: doc.data().userPhotoURL,
+        userId: doc.data().userId,
+        date: doc.data().date,
+        feeling: doc.data().feeling,
+        caption: doc.data().caption,
+        postPhotoURL: doc.data().postPhotoURL,
+        likes: doc.data().likes,
+        comments: doc.data().comments,
+      }));
+      setposts(data);
+    });
+    return () => unsubscribe();
+  }, []);
+
   return (
     <main>
       {displayForm && <RealInputForm />}
@@ -42,8 +69,9 @@ function App() {
       <div className="main">
         <FakeInputForm />
 
-        <Post />
-        <Post />
+        {[...posts].reverse().map((post, index) => (
+          <Post key={index} {...post} />
+        ))}
       </div>
       <aside className="rightSide">
         <Trending />

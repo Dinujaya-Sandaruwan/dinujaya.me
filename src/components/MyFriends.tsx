@@ -9,7 +9,7 @@ const MyFriends = () => {
       </div>
       <div className="myFriendsList">
         <div className="friendsLeftSide">
-          <img src={avatar} alt="" />
+          <img src="https://thispersondoesnotexist.com/" alt="" />
           <div>
             <h4>John Doe</h4>
             <p>Last active recently</p>

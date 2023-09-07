@@ -1,0 +1,32 @@
+/* For Firefox */
+.scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #aaaaaa #17181c;
+}
+
+.scrollbar-thumb {
+  border-radius: 10px;
+}
+
+/* For WebKit-based browsers (Chrome, Safari) */
+/* Note: WebKit requires the use of pseudo-elements */
+::-webkit-scrollbar {
+  width: 10px; /* Adjust the width as needed */
+}
+
+::-webkit-scrollbar-track {
+  background-color: #383838;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #aaaaaa;
+  border-radius: 10px;
+}
+
+/* For Internet Explorer (MS Edge) */
+/* Note: Internet Explorer has limited scrollbar styling options */
+/* You can only change the scrollbar color */
+* {
+  scrollbar-base-color: #383838;
+  scrollbar-face-color: #aaaaaa;
+}
