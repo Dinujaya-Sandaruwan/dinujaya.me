@@ -5,7 +5,7 @@ interface AuthStore {
   setUserName: (userName: string) => void;
   photoURL: string;
   setPhotoURL: (photoURL: string) => void;
-  userid: string;
+  userId: string;
   setUserId: (userid: string) => void;
 }
 
@@ -14,8 +14,8 @@ const useAuthStore = create<AuthStore>((set) => ({
   setUserName: (userName: string) => set({ userName }),
   photoURL: "",
   setPhotoURL: (photoURL: string) => set({ photoURL }),
-  userid: "",
-  setUserId: (userid: string) => set({ userid }),
+  userId: "",
+  setUserId: (userId: string) => set({ userId }),
 }));
 
 export default useAuthStore;

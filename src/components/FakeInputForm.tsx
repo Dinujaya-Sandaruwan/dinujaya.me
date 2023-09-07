@@ -5,16 +5,28 @@ import { CiLocationOn, CiFaceSmile } from "react-icons/ci";
 import avatar from "../assets/avatar.jpg";
 import useAuthStore from "../global/authStore";
 import useDisplayForm from "../global/displayFormStore";
+import useGoogleAuth from "../hooks/useGoogleAuth";
 
 const FakeInputForm = () => {
   const { setDisplayForm } = useDisplayForm();
   const { photoURL } = useAuthStore();
+
+  const { userId } = useAuthStore();
+  const { signInWithGoogle } = useGoogleAuth();
+
+  const openRealForm = () => {
+    if (userId == "") {
+      signInWithGoogle();
+      return;
+    }
+    setDisplayForm(true);
+  };
   return (
-    <div className="main__fakeInputForm" onClick={() => setDisplayForm(true)}>
+    <div className="main__fakeInputForm" onClick={openRealForm}>
       <div className="topSide">
         <img
           src={photoURL == "" ? avatar : photoURL}
-          alt=""
+          alt="user Avatar"
           className="avatar"
         />
         <input type="text" placeholder="What's on your mind?" />
