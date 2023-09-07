@@ -4,7 +4,11 @@ import { BsBookmarkCheck, BsClock, BsThreeDotsVertical } from "react-icons/bs";
 import ImageGallery from "react-image-gallery";
 import { PiShareDuotone } from "react-icons/pi";
 import { FaChevronDown } from "react-icons/fa";
+import { AiOutlineClose } from "react-icons/ai";
 import { Posts } from "../interfaces/postFaces";
+import useDeletePost from "../hooks/useDeletePost";
+
+import useAuthStore from "../global/authStore";
 
 const Post = ({
   userName,
@@ -14,7 +18,11 @@ const Post = ({
   caption,
   postPhotoURL,
   likes,
+  postId,
+  userId: postUserId,
 }: Posts) => {
+  const { deletePost } = useDeletePost();
+  const { userId: currentUserId } = useAuthStore();
   return (
     <div className="main__post">
       <div className="postAccount">
@@ -32,8 +40,15 @@ const Post = ({
           </div>
         </div>
         <div className="mainLeft">
-          <BsBookmarkCheck />
-          <BsThreeDotsVertical />
+          <BsBookmarkCheck className="postBookMark" />
+          {postUserId == currentUserId ? (
+            <AiOutlineClose
+              onClick={() => deletePost(postId)}
+              className="postDelete"
+            />
+          ) : (
+            <BsThreeDotsVertical />
+          )}
         </div>
       </div>
       <div className="postCaption">{caption}</div>

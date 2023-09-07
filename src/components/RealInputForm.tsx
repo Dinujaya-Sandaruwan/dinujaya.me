@@ -14,7 +14,7 @@ const RealInputForm = () => {
   const realForm = useRef<HTMLDivElement>(null);
   const { setDisplayForm } = useDisplayForm();
   const [feeling, setfeeling] = useState<string | null>("");
-  const { userName, photoURL, userid } = useAuthStore();
+  const { userName, photoURL, userId } = useAuthStore();
   const addedDate = useDate();
   const [caption, setcaption] = useState("");
 
@@ -52,7 +52,7 @@ const RealInputForm = () => {
         postId: docID,
         userName: userName,
         userPhotoURL: photoURL,
-        userId: userid,
+        userId: userId,
         date: addedDate,
         feeling: feeling,
         caption: caption,

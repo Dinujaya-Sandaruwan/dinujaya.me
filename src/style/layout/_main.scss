@@ -96,7 +96,7 @@
   &__post {
     width: clamp(300px, 85%, 1000px);
     background-color: var(--component-background);
-    border: 2px solid var(--border);
+    // border: 2px solid var(--border);
     border-radius: 10px;
 
     margin-top: 20px;
@@ -152,8 +152,19 @@
         @extend .flexAlign;
         gap: 10px;
 
-        @media (max-width: 600px) {
-          display: none;
+        .postBookMark {
+          @media (max-width: 600px) {
+            display: none;
+          }
+        }
+
+        .postDelete {
+          cursor: pointer;
+          font-size: rem(30);
+
+          &:hover {
+            color: rgb(252, 73, 73);
+          }
         }
       }
     }
