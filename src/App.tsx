@@ -22,6 +22,9 @@ import useAuthStore from "./global/authStore";
 import useDisplayForm from "./global/displayFormStore";
 import { Posts } from "./interfaces/postFaces";
 
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+
 function App() {
   const { displayForm } = useDisplayForm();
   const { userName } = useAuthStore();
@@ -68,6 +71,7 @@ function App() {
       </aside>
       <div className="main">
         <FakeInputForm />
+        <Skeleton count={1} />
 
         {[...posts].reverse().map((post, index) => (
           <Post key={index} {...post} />

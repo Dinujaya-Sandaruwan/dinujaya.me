@@ -9,6 +9,8 @@ import { Posts } from "../interfaces/postFaces";
 import useDeletePost from "../hooks/useDeletePost";
 
 import useAuthStore from "../global/authStore";
+import { useState } from "react";
+import useAddComments from "../hooks/useAddComments";
 
 const Post = ({
   userName,
@@ -23,6 +25,26 @@ const Post = ({
 }: Posts) => {
   const { deletePost } = useDeletePost();
   const { userId: currentUserId } = useAuthStore();
+
+  const [comment, setcomment] = useState("");
+
+  const clearComment = () => {
+    setcomment("");
+  };
+
+  const { addComment, commentLoading } = useAddComments({
+    postId,
+    comment,
+    clearComment,
+  });
+
+  const handleComment = () => {
+    if (comment == "") {
+      return;
+    }
+    addComment();
+  };
+
   return (
     <div className="main__post">
       <div className="postAccount">
@@ -69,7 +91,7 @@ const Post = ({
         </div>
         <div className="comment">
           <AiOutlineComment />
-          <label htmlFor="postComments">Comment</label>
+          <label>comment</label>
 
           <span className="pstAlat">12</span>
         </div>
@@ -87,8 +109,16 @@ const Post = ({
             type="text"
             id="postComments"
             placeholder="Write a comment..."
+            onChange={(e) => setcomment(e.target.value)}
+            value={comment}
           />
-          <button className="submitComment">Comment</button>
+          <button
+            className="submitComment"
+            onClick={handleComment}
+            disabled={commentLoading}
+          >
+            {commentLoading ? "Commenting..." : "Comment"}
+          </button>
         </div>
       </div>
 
