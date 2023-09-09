@@ -1,5 +1,5 @@
 import { AiFillLike, AiOutlineComment } from "react-icons/ai";
-import avatar from "../assets/avatar.jpg";
+
 import { BsBookmarkCheck, BsClock, BsThreeDotsVertical } from "react-icons/bs";
 import ImageGallery from "react-image-gallery";
 import { PiShareDuotone } from "react-icons/pi";
@@ -22,9 +22,10 @@ const Post = ({
   likes,
   postId,
   userId: postUserId,
+  comments,
 }: Posts) => {
   const { deletePost } = useDeletePost();
-  const { userId: currentUserId } = useAuthStore();
+  const { userId: currentUserId, photoURL: currentPhotoURL } = useAuthStore();
 
   const [comment, setcomment] = useState("");
 
@@ -43,6 +44,12 @@ const Post = ({
       return;
     }
     addComment();
+  };
+
+  const [showMoreComments, setShowMoreComments] = useState(false);
+
+  const toggleShowMoreComments = () => {
+    setShowMoreComments((prev: boolean) => !prev);
   };
 
   return (
@@ -103,7 +110,7 @@ const Post = ({
       </div>
       <hr className="postDevider" />
       <div className="postCommentInput">
-        <img src={avatar} alt="" />
+        <img src={currentPhotoURL} alt="" />
         <div className="inputBox">
           <input
             type="text"
@@ -124,7 +131,7 @@ const Post = ({
 
       <div className="postComments">
         <div className="commentsNav">
-          <div className="commentsNavLeft">
+          <div className="commentsNavLeft" onClick={toggleShowMoreComments}>
             All comments
             <FaChevronDown />
           </div>
@@ -133,15 +140,36 @@ const Post = ({
             <span className="white">Most popular</span>
           </div>
         </div>
-        <div className="allComents">
-          <img src={avatar} alt="" className="commentAvatar" />
-          <p>
-            <span className="userName">Dinujaya Sandaruwan:</span> &nbsp;A
-            preloader, also known, as a loading page, or preloading screen it's
-            the loading animation or static image that shows on your screen
-            while the main app is loading in the background
-          </p>
-        </div>
+        {showMoreComments
+          ? [...comments].reverse().map((comment, index) => (
+              <div className="allComents" key={index}>
+                <img
+                  src={comment.userPhotoURL}
+                  alt=""
+                  className="commentAvatar"
+                />
+                <p>
+                  <span className="userName">{comment.userName}:</span> &nbsp;
+                  {comment.comment}
+                </p>
+              </div>
+            ))
+          : [...comments]
+              .slice(-3)
+              .reverse()
+              .map((comment, index) => (
+                <div className="allComents" key={index}>
+                  <img
+                    src={comment.userPhotoURL}
+                    alt=""
+                    className="commentAvatar"
+                  />
+                  <p>
+                    <span className="userName">{comment.userName}:</span> &nbsp;
+                    {comment.comment}
+                  </p>
+                </div>
+              ))}
       </div>
     </div>
   );

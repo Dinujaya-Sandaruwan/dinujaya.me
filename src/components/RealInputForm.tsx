@@ -58,7 +58,7 @@ const RealInputForm = () => {
         caption: caption,
         postPhotoURL: formatedUrls,
         likes: 0,
-        comments: [{}],
+        comments: [],
       };
 
       const postDocRef = doc(postCollectionRef, docID);

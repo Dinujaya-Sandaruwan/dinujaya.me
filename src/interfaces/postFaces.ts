@@ -6,6 +6,7 @@ interface Comments {
   userName: string;
   userPhotoURL: string;
   userId: string;
+  comment: string;
 }
 
 export interface Posts {
