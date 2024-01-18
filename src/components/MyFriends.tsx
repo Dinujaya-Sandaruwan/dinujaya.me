@@ -1,5 +1,4 @@
 import { FiChevronDown } from "react-icons/fi";
-import avatar from "../assets/avatar.jpg";
 
 const MyFriends = () => {
   return (
@@ -20,7 +19,7 @@ const MyFriends = () => {
 
       <div className="myFriendsList">
         <div className="friendsLeftSide">
-          <img src={avatar} alt="" />
+          <img src="./avatar.jpg" alt="" />
           <div>
             <h4>John Doe</h4>
             <p>Last active recently</p>
@@ -31,7 +30,7 @@ const MyFriends = () => {
 
       <div className="myFriendsList">
         <div className="friendsLeftSide">
-          <img src={avatar} alt="" />
+          <img src="./avatar.jpg" alt="" />
           <div>
             <h4>John Doe</h4>
             <p>Last active recently</p>
@@ -42,7 +41,7 @@ const MyFriends = () => {
 
       <div className="myFriendsList">
         <div className="friendsLeftSide">
-          <img src={avatar} alt="" />
+          <img src="./avatar.jpg" alt="" />
           <div>
             <h4>John Doe</h4>
             <p>Last active recently</p>
