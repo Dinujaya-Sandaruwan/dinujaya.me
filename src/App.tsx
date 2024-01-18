@@ -22,8 +22,8 @@ import useAuthStore from "./global/authStore";
 import useDisplayForm from "./global/displayFormStore";
 import { Posts } from "./interfaces/postFaces";
 
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
+// import Skeleton from "react-loading-skeleton";
+// import "react-loading-skeleton/dist/skeleton.css";
 
 function App() {
   const { displayForm } = useDisplayForm();

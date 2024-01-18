@@ -5,6 +5,8 @@ import ImageGallery from "react-image-gallery";
 import { PiShareDuotone } from "react-icons/pi";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
+import { toast } from "react-toastify";
+
 import { Posts } from "../interfaces/postFaces";
 import useDeletePost from "../hooks/useDeletePost";
 
@@ -44,12 +46,22 @@ const Post = ({
     if (comment == "") {
       return;
     }
+
     addComment();
+  };
+
+  const submitComment = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      handleComment();
+    }
   };
 
   const [showMoreComments, setShowMoreComments] = useState(false);
 
   const toggleShowMoreComments = () => {
+    if (comments.length <= 3) {
+      return;
+    }
     setShowMoreComments((prev: boolean) => !prev);
   };
 
@@ -109,11 +121,11 @@ const Post = ({
         </div>
         <div className="comment">
           <AiOutlineComment />
-          <label>comment</label>
+          <label htmlFor="postComments">comment</label>
 
           <span className="pstAlat">{comments.length}</span>
         </div>
-        <div className="share">
+        <div className="share" onClick={() => toast("Comming soon 😁")}>
           <PiShareDuotone />
           <span>Share</span>
           <span className="pstAlat">12</span>
@@ -129,6 +141,7 @@ const Post = ({
             placeholder="Write a comment..."
             onChange={(e) => setcomment(e.target.value)}
             value={comment}
+            onKeyDown={submitComment}
           />
           <button
             className="submitComment"
