@@ -301,6 +301,7 @@
         .commentsNavLeft {
           @extend .flexAlign;
           color: var(--white);
+          opacity: 70%;
           cursor: pointer;
           *:nth-child(1) {
             margin-left: 10px;

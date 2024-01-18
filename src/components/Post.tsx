@@ -3,7 +3,7 @@ import { AiFillLike, AiOutlineComment } from "react-icons/ai";
 import { BsBookmarkCheck, BsClock, BsThreeDotsVertical } from "react-icons/bs";
 import ImageGallery from "react-image-gallery";
 import { PiShareDuotone } from "react-icons/pi";
-import { FaChevronDown } from "react-icons/fa";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 import { Posts } from "../interfaces/postFaces";
 import useDeletePost from "../hooks/useDeletePost";
@@ -111,7 +111,7 @@ const Post = ({
           <AiOutlineComment />
           <label>comment</label>
 
-          <span className="pstAlat">12</span>
+          <span className="pstAlat">{comments.length}</span>
         </div>
         <div className="share">
           <PiShareDuotone />
@@ -143,8 +143,8 @@ const Post = ({
       <div className="postComments">
         <div className="commentsNav">
           <div className="commentsNavLeft" onClick={toggleShowMoreComments}>
-            All comments
-            <FaChevronDown />
+            {showMoreComments ? "Show less comments" : "Show more comments"}
+            {showMoreComments ? <FaChevronUp /> : <FaChevronDown />}
           </div>
           <div className="commentsNavright">
             <span className="gray">Sort by</span>
