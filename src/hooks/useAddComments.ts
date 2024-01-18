@@ -11,8 +11,11 @@ interface Props {
 
 const useAddComments = ({ postId, comment, clearComment }: Props) => {
   const [commentLoading, setcommentLoading] = useState(false);
-  const { userName: currentUserName, photoURL: CurrentUserPhotoURL } =
-    useAuthStore();
+  const {
+    userName: currentUserName,
+    photoURL: CurrentUserPhotoURL,
+    userId,
+  } = useAuthStore();
   const addComment = async () => {
     setcommentLoading(true);
     try {
@@ -22,6 +25,7 @@ const useAddComments = ({ postId, comment, clearComment }: Props) => {
       const newComment = {
         userName: currentUserName,
         userPhotoURL: CurrentUserPhotoURL,
+        userId: userId,
         comment: comment,
       };
 

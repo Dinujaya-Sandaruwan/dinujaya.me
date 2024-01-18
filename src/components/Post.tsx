@@ -11,6 +11,7 @@ import useDeletePost from "../hooks/useDeletePost";
 import useAuthStore from "../global/authStore";
 import { useState } from "react";
 import useAddComments from "../hooks/useAddComments";
+import useAddLikes from "../hooks/useAddLikes";
 
 const Post = ({
   userName,
@@ -52,6 +53,12 @@ const Post = ({
     setShowMoreComments((prev: boolean) => !prev);
   };
 
+  // Likes
+  const { like, addLike, liked } = useAddLikes({
+    likeCount: likes,
+    postId: postId,
+  });
+
   return (
     <div className="main__post">
       <div className="postAccount">
@@ -91,10 +98,14 @@ const Post = ({
       </div>
 
       <div className="postButtons">
-        <div className="like">
+        <div
+          className="like"
+          onClick={addLike}
+          style={liked ? { color: "var(--logoBlue)" } : {}}
+        >
           <AiFillLike />
           <span>Like</span>
-          <span className="pstAlat">{likes}</span>
+          <span className="pstAlat">{like}</span>
         </div>
         <div className="comment">
           <AiOutlineComment />

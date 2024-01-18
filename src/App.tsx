@@ -27,7 +27,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 function App() {
   const { displayForm } = useDisplayForm();
-  const { userName } = useAuthStore();
+  const { userName, userId } = useAuthStore();
 
   const [posts, setposts] = useState([] as Posts[]);
   const postCollectionRef = collection(db, "posts");
@@ -71,11 +71,14 @@ function App() {
       </aside>
       <div className="main">
         <FakeInputForm />
-        <Skeleton count={1} />
+        {/* <Skeleton count={1} /> */}
 
-        {[...posts].reverse().map((post, index) => (
-          <Post key={index} {...post} />
-        ))}
+        {[...posts]
+          .filter((post) => post.userId == userId)
+          .reverse()
+          .map((post, index) => (
+            <Post key={index} {...post} />
+          ))}
       </div>
       <aside className="rightSide">
         <Trending />
