@@ -6,7 +6,7 @@ import Events from "./components/Events";
 import FakeInputForm from "./components/FakeInputForm";
 import HomeIcon from "./components/HomeIcon";
 import MainLogo from "./components/MainLogo";
-import MyFriends from "./components/MyFriends";
+import MyFriends from "./components/Mentors";
 
 import NavProfile from "./components/NavProfile";
 import Post from "./components/Post";

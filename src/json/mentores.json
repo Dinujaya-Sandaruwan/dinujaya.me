@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Mosh Hamedani",
+    "state": "Code with Mosh",
+    "image": "./mentors/mosh.jpg",
+    "subscribers": "3.71M",
+    "url": "https://www.youtube.com/channel/UCWv7vMbMWH4-V0ZXdmDpPBA"
+  },
+  {
+    "name": "Jessica Chan",
+    "state": "Coder Coder",
+    "image": "./mentors/Jess.webp",
+    "subscribers": "480K",
+    "url": "https://www.youtube.com/@TheCoderCoder"
+  },
+  {
+    "name": "Kyle Cook",
+    "state": "Web Dev Simplified",
+    "image": "./mentors/kyle.png",
+    "subscribers": "1.48M",
+    "url": "https://www.youtube.com/channel/UCFbNIlppjAuEX4znoulh0Cw"
+  },
+  {
+    "name": "Kevin Powell",
+    "state": "Kevin Powell (CSS)",
+    "image": "./mentors/kevin.jpeg",
+    "subscribers": "863K",
+    "url": "https://www.youtube.com/channel/UCJZv4d5rbIKd4QHMPkcABCw"
+  },
+  {
+    "name": "Adrian Hajdin",
+    "state": "JavaScript Mastery",
+    "image": "./mentors/adrian.jpeg",
+    "subscribers": "777K",
+    "url": "https://www.youtube.com/channel/UCmXmlB4-HJytD7wek0Uo97A"
+  }
+]
