@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { BiSolidCloudUpload } from "react-icons/bi";
 import useDisplayForm from "../global/displayFormStore";
-
 import { collection, doc, setDoc } from "firebase/firestore";
 import { db, storage } from "../firebase/config";
 import useDocId from "../hooks/useDocId";
@@ -9,6 +8,7 @@ import useAuthStore from "../global/authStore";
 import useDate from "../hooks/useDate";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
+import ImageCompressor from "image-compressor.js";
 
 const RealInputForm = () => {
   const realForm = useRef<HTMLDivElement>(null);
@@ -29,13 +29,31 @@ const RealInputForm = () => {
     const urls = [];
     if (imagesArray) {
       for (let i = 0; i < imagesArray.length; i++) {
+        // Use image-compressor.js to compress the image before uploading
+        const compressedImage = await compressImage(imagesArray[i]);
+
         const uploadTask = ref(storage, `postImages/postImg_${v4()}`);
-        const snapshot = await uploadBytes(uploadTask, imagesArray[i]);
+        const snapshot = await uploadBytes(uploadTask, compressedImage as File);
         const url = await getDownloadURL(snapshot.ref);
         urls.push(url);
       }
     }
     return urls;
+  };
+
+  const compressImage = (image: File) => {
+    return new Promise((resolve) => {
+      new ImageCompressor(image, {
+        quality: 0.2,
+        success(result) {
+          resolve(result);
+        },
+        error(err) {
+          console.error("Error compressing image:", err);
+          resolve(image);
+        },
+      });
+    });
   };
 
   const onSubmitPost = async () => {
@@ -64,7 +82,6 @@ const RealInputForm = () => {
       const postDocRef = doc(postCollectionRef, docID);
       await setDoc(postDocRef, postData);
 
-      // console.log("Post data successfully uploaded to Firestore");
       setDisplayForm(false);
     } catch (error) {
       console.error("Error uploading post data:", error);
@@ -152,7 +169,6 @@ const RealInputForm = () => {
             🤔
           </span>
         </div>
-
         {feeling && (
           <div className="oneFeelingSelected">You are in {feeling}</div>
         )}
@@ -179,7 +195,7 @@ const RealInputForm = () => {
           onClick={onSubmitPost}
           disabled={loading}
         >
-          {loading ? "Createing new post..." : " Create new post"}
+          {loading ? "Creating new post..." : " Create new post"}
         </button>
       </div>
     </div>
