@@ -1,38 +1,23 @@
+import groups from "../json/groups.json";
+
 const Community = () => {
   return (
     <div className="leftSide__community">
       <div className="communityNav">
-        <p>My community</p>
-        <span className="communityAlat">29</span>
+        <p>Dinu's recent groups</p>
+        <span className="communityAlat">03</span>
       </div>
-      <div className="communityItem">
-        <img src="./community.jpg" alt="" />
-        <div className="text">
-          <h3>Sri Lankan REACT Devel...</h3>
-          <p>153k members</p>
-        </div>
-      </div>
-      <div className="communityItem">
-        <img src="./community.jpg" alt="" />
-        <div className="text">
-          <h3>Sri Lankan MERN Develo...</h3>
-          <p>569k members</p>
-        </div>
-      </div>
-      <div className="communityItem">
-        <img src="./community.jpg" alt="" />
-        <div className="text">
-          <h3>Sri Lankan Web Develo...</h3>
-          <p>748k members</p>
-        </div>
-      </div>
-      <div className="communityItem">
-        <img src="./community.jpg" alt="" />
-        <div className="text">
-          <h3>Sri Lankan Flutter Devel...</h3>
-          <p>658k members</p>
-        </div>
-      </div>
+      {groups.map((group, index) => (
+        <a href={group.url} key={index} target="_blank">
+          <div className="communityItem">
+            <img src={group.image_url} alt="" />
+            <div className="text">
+              <h3>{group.name}</h3>
+              <p>{group.member_count}</p>
+            </div>
+          </div>
+        </a>
+      ))}
     </div>
   );
 };
