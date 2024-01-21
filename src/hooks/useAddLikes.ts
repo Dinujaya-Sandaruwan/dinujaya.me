@@ -29,7 +29,7 @@ const useAddLikes = ({ likeCount, postId }: Props) => {
         if (docSnapshot.exists()) {
           const currentLikes = docSnapshot.data()?.likes || 0;
           setLike(currentLikes);
-          setLiked((liked) => liked || currentLikes > 0); // Set liked to true if currentLikes is greater than 0
+          setLiked(currentLikes > 0);
         }
       } catch (error) {
         console.log(error);
@@ -69,8 +69,8 @@ const useAddLikes = ({ likeCount, postId }: Props) => {
           likedPosts: arrayUnion(postId),
         });
 
+        // Use the functional form of setLike to ensure it's based on the latest state
         setLike((prev) => prev + 1);
-        setLiked(true);
       } else {
         // Update post likes
         await updateDoc(postDocRef, { likes: like - 1 });
@@ -80,15 +80,15 @@ const useAddLikes = ({ likeCount, postId }: Props) => {
           likedPosts: arrayRemove(postId),
         });
 
+        // Use the functional form of setLike to ensure it's based on the latest state
         setLike((prev) => prev - 1);
-        setLiked(false);
       }
     } catch (error) {
       console.error("Error updating like count:", error);
+      // If an error occurs, revert the liked state to its previous value
+      setLiked((prev) => !prev);
     }
   };
-  console.log(liked);
-
   return { addLike, like, liked };
 };
 
