@@ -6,8 +6,10 @@ import avatar from "../assets/avatar.jpg";
 import useAuthStore from "../global/authStore";
 import useDisplayForm from "../global/displayFormStore";
 import useGoogleAuth from "../hooks/useGoogleAuth";
+import { useState } from "react";
 
 const FakeInputForm = () => {
+  const [postValue] = useState("");
   const { setDisplayForm } = useDisplayForm();
   const { photoURL } = useAuthStore();
 
@@ -29,7 +31,11 @@ const FakeInputForm = () => {
           alt="user Avatar"
           className="avatar"
         />
-        <input type="text" placeholder="What's on your mind?" />
+        <input
+          type="text"
+          placeholder="What's on your mind?"
+          value={postValue}
+        />
       </div>
       <div className="bottumSide">
         <div className="icons">

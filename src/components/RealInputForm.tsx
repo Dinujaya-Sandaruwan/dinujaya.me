@@ -144,6 +144,15 @@ const RealInputForm = () => {
     setfeeling(value);
   };
 
+  // Focus textarea on click
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+  useEffect(() => {
+    // Focus the textarea when the component is mounted
+    if (textareaRef.current) {
+      textareaRef.current.focus();
+    }
+  }, []);
+
   return (
     <div className="realInputForm">
       <div className="inputFormDiv" ref={realForm} onClick={handleFormClick}>
@@ -151,6 +160,7 @@ const RealInputForm = () => {
         <textarea
           placeholder="Type here..."
           value={caption}
+          ref={textareaRef}
           onChange={(e) => setcaption(e.target.value)}
         />
         <label className="formFeelingLable">
