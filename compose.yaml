@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  web:
+    build: ./
+    ports: 
+     - "3000:5173"
+    volumes:
+      - react-app:/data/db 
+    develop:
+      watch:
+        - path: ./package*.json
+          action: rebuild
+        - path: ./pnpm-lock.yaml
+          action: rebuild
+        - path: ./src
+          action: rebuild
+        - path: ./
+          action: sync
+
+volumes:
+  react-app:
