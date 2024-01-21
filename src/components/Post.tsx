@@ -1,3 +1,4 @@
+import { useRef, useState } from "react";
 import { AiFillLike, AiOutlineComment } from "react-icons/ai";
 
 import { BsBookmarkCheck, BsClock, BsThreeDotsVertical } from "react-icons/bs";
@@ -11,7 +12,6 @@ import { Posts } from "../interfaces/postFaces";
 import useDeletePost from "../hooks/useDeletePost";
 
 import useAuthStore from "../global/authStore";
-import { useState } from "react";
 import useAddComments from "../hooks/useAddComments";
 import useAddLikes from "../hooks/useAddLikes";
 
@@ -71,6 +71,18 @@ const Post = ({
     postId: postId,
   });
 
+  // caption
+  const slisedCaption = caption.slice(0, 300);
+  const [displaySeeMore, setDisplaySeeMore] = useState(true);
+
+  const captionRef = useRef<HTMLDivElement>(null);
+  const showFullCaption = () => {
+    if (captionRef.current) {
+      captionRef.current.innerHTML = caption;
+      setDisplaySeeMore(false);
+    }
+  };
+
   return (
     <div className="main__post">
       <div className="postAccount">
@@ -99,8 +111,16 @@ const Post = ({
           )}
         </div>
       </div>
-      <div className="postCaption">{caption}</div>
-
+      <div
+        className="postCaption"
+        dangerouslySetInnerHTML={{ __html: slisedCaption }}
+        ref={captionRef}
+      />
+      {caption.length > 300 && displaySeeMore && (
+        <span className="read-more" onClick={showFullCaption}>
+          ...see more
+        </span>
+      )}
       <div className="postImages">
         <ImageGallery
           items={postPhotoURL}
@@ -108,7 +128,6 @@ const Post = ({
           autoPlay={true}
         />
       </div>
-
       <div className="postButtons">
         <div
           className="like"
@@ -152,7 +171,6 @@ const Post = ({
           </button>
         </div>
       </div>
-
       <div className="postComments">
         <div className="commentsNav">
           <div className="commentsNavLeft" onClick={toggleShowMoreComments}>
