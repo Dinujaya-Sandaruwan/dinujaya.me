@@ -1,12 +1,12 @@
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { AiFillLike, AiOutlineComment } from "react-icons/ai";
 
 import { BsBookmarkCheck, BsClock, BsThreeDotsVertical } from "react-icons/bs";
-import ImageGallery from "react-image-gallery";
 import { PiShareDuotone } from "react-icons/pi";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 import { toast } from "react-toastify";
+import ImageViewer from "react-simple-image-viewer";
 
 import { Posts } from "../interfaces/postFaces";
 import useDeletePost from "../hooks/useDeletePost";
@@ -83,6 +83,21 @@ const Post = ({
     }
   };
 
+  // Image Viewer
+
+  const [currentImage, setCurrentImage] = useState(0);
+  const [isViewerOpen, setIsViewerOpen] = useState(false);
+
+  const openImageViewer = useCallback((index: number) => {
+    setCurrentImage(index);
+    setIsViewerOpen(true);
+  }, []);
+
+  const closeImageViewer = () => {
+    setCurrentImage(0);
+    setIsViewerOpen(false);
+  };
+
   return (
     <div className="main__post">
       <div className="postAccount">
@@ -122,11 +137,27 @@ const Post = ({
         </span>
       )}
       <div className="postImages">
-        <ImageGallery
-          items={postPhotoURL}
-          showThumbnails={false}
-          autoPlay={true}
-        />
+        {postPhotoURL[0] ? (
+          <img
+            src={postPhotoURL[0]}
+            onClick={() => openImageViewer(0)}
+            width="100%"
+          />
+        ) : (
+          <div className="react-loading-skeleton">
+            <div className="test"></div>
+          </div>
+        )}
+
+        {isViewerOpen && (
+          <ImageViewer
+            src={postPhotoURL}
+            currentIndex={currentImage}
+            disableScroll={true}
+            closeOnClickOutside={true}
+            onClose={closeImageViewer}
+          />
+        )}
       </div>
       <div className="postButtons">
         <div

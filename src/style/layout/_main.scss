@@ -203,6 +203,43 @@
 
     .postImages {
       margin: 15px -15px 0px -15px;
+
+      @keyframes progress {
+        0% {
+          background-position: -200px 0;
+        }
+        100% {
+          background-position: calc(200px + 100%) 0;
+        }
+      }
+
+      .react-loading-skeleton {
+        animation: progress 1.2s ease-in-out infinite;
+        background-color: var(--body-background);
+        background-image: linear-gradient(
+          90deg,
+          var(--body-background),
+          var(--component-background),
+          var(--body-background)
+        );
+        background-size: 500px 100%;
+        background-repeat: no-repeat;
+      }
+
+      img {
+        z-index: 2;
+      }
+
+      .test {
+        z-index: 1;
+
+        height: 500px;
+        width: 500px;
+        border-radius: 4px;
+        display: inline-block;
+        line-height: 1;
+        width: 100%;
+      }
     }
 
     .postButtons {

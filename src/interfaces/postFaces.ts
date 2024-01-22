@@ -1,7 +1,3 @@
-interface PostPhotoURL {
-  original: string;
-}
-
 interface Comments {
   userName: string;
   userPhotoURL: string;
@@ -17,7 +13,7 @@ export interface Posts {
   date: string;
   feeling: string;
   caption: string;
-  postPhotoURL: PostPhotoURL[];
+  postPhotoURL: string[];
   likes: number;
   comments: Comments[];
 }

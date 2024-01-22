@@ -90,9 +90,9 @@ const RealInputForm = () => {
       const formattedCaption = await formatCaption(caption);
       const urls = await uploadPosts();
 
-      const formatedUrls = urls.map((url) => {
-        return { original: url };
-      });
+      // const formatedUrls = urls.map((url) => {
+      //   return { original: url };
+      // });
 
       const postData = {
         postId: docID,
@@ -102,7 +102,7 @@ const RealInputForm = () => {
         date: addedDate,
         feeling: feeling,
         caption: formattedCaption,
-        postPhotoURL: formatedUrls,
+        postPhotoURL: urls,
         likes: 0,
         comments: [],
       };
