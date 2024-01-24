@@ -4,6 +4,7 @@ import { AiFillLike, AiOutlineComment } from "react-icons/ai";
 import { BsBookmarkCheck, BsClock, BsThreeDotsVertical } from "react-icons/bs";
 import { PiShareDuotone } from "react-icons/pi";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { FaImages } from "react-icons/fa6";
 import { AiOutlineClose } from "react-icons/ai";
 import { toast } from "react-toastify";
 import ImageViewer from "react-simple-image-viewer";
@@ -149,14 +150,22 @@ const Post = ({
           </div>
         )}
 
+        {postPhotoURL.length > 1 && (
+          <span className="imageLength">
+            {postPhotoURL.length} <FaImages />
+          </span>
+        )}
+
         {isViewerOpen && (
-          <ImageViewer
-            src={postPhotoURL}
-            currentIndex={currentImage}
-            disableScroll={true}
-            closeOnClickOutside={true}
-            onClose={closeImageViewer}
-          />
+          <div className="imageViewer">
+            <ImageViewer
+              src={postPhotoURL}
+              currentIndex={currentImage}
+              disableScroll={true}
+              closeOnClickOutside={true}
+              onClose={closeImageViewer}
+            />
+          </div>
         )}
       </div>
       <div className="postButtons">
