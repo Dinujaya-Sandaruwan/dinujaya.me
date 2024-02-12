@@ -16,4 +16,5 @@ export interface Posts {
   postPhotoURL: string[];
   likes: number;
   comments: Comments[];
+  isApproved: boolean;
 }

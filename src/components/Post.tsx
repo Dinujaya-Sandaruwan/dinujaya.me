@@ -3,7 +3,7 @@ import { AiFillLike, AiOutlineComment } from "react-icons/ai";
 
 import { BsBookmarkCheck, BsClock, BsThreeDotsVertical } from "react-icons/bs";
 import { PiShareDuotone } from "react-icons/pi";
-import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { FaChevronDown, FaChevronUp, FaCheck } from "react-icons/fa";
 import { FaImages } from "react-icons/fa6";
 import { AiOutlineClose } from "react-icons/ai";
 import { toast } from "react-toastify";
@@ -15,6 +15,7 @@ import useDeletePost from "../hooks/useDeletePost";
 import useAuthStore from "../global/authStore";
 import useAddComments from "../hooks/useAddComments";
 import useAddLikes from "../hooks/useAddLikes";
+import useApprovePost from "../hooks/useApprovePost";
 
 const Post = ({
   userName,
@@ -27,6 +28,7 @@ const Post = ({
   postId,
   userId: postUserId,
   comments,
+  isApproved,
 }: Posts) => {
   const { deletePost } = useDeletePost();
   const { userId: currentUserId, photoURL: currentPhotoURL } = useAuthStore();
@@ -99,6 +101,21 @@ const Post = ({
     setIsViewerOpen(false);
   };
 
+  // Approve Post
+
+  const approvePost = useApprovePost({ postId });
+  const [isApproving, setIsApproving] = useState(false);
+  const handleApprovePost = async () => {
+    setIsApproving(true);
+    try {
+      await approvePost();
+    } catch (error) {
+      console.error("Error approving post:", error);
+    } finally {
+      setIsApproving(false);
+    }
+  };
+
   return (
     <div className="main__post">
       <div className="postAccount">
@@ -116,6 +133,16 @@ const Post = ({
           </div>
         </div>
         <div className="mainLeft">
+          {isApproved || <span className="notApproved">(Not Approved)</span>}
+          {currentUserId == "0OqCmQUVoQZHPnry8EGXzdbehbS2" && !isApproved ? (
+            <FaCheck
+              color="green"
+              onClick={handleApprovePost}
+              disabled={isApproving}
+            />
+          ) : (
+            ""
+          )}
           <BsBookmarkCheck className="postBookMark" />
           {postUserId == currentUserId ? (
             <AiOutlineClose

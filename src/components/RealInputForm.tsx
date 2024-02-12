@@ -105,6 +105,7 @@ const RealInputForm = () => {
         postPhotoURL: urls,
         likes: 0,
         comments: [],
+        isApproved: false,
       };
 
       const postDocRef = doc(postCollectionRef, docID);

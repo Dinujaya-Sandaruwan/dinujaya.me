@@ -32,6 +32,8 @@ function App() {
   const [posts, setposts] = useState([] as Posts[]);
   const postCollectionRef = collection(db, "posts");
 
+  const isAdmin = userId == "0OqCmQUVoQZHPnry8EGXzdbehbS2";
+
   useEffect(() => {
     const unsubscribe = onSnapshot(postCollectionRef, (snapshot) => {
       const data = snapshot.docs.map((doc) => ({
@@ -45,6 +47,7 @@ function App() {
         postPhotoURL: doc.data().postPhotoURL,
         likes: doc.data().likes,
         comments: doc.data().comments,
+        isApproved: doc.data().isApproved,
       }));
       setposts(data);
     });
@@ -73,12 +76,21 @@ function App() {
         <FakeInputForm />
         {/* <Skeleton count={1} /> */}
 
-        {[...posts]
-          .filter((post) => post.userId == userId)
-          .reverse()
-          .map((post, index) => (
-            <Post key={index} {...post} />
-          ))}
+        {isAdmin &&
+          [...posts]
+            .reverse()
+            .map((post, index) => <Post key={index} {...post} />)}
+
+        {isAdmin ||
+          [...posts]
+            .filter((post) => post.userId == userId && post.isApproved == false)
+            .reverse()
+            .map((post, index) => <Post key={index} {...post} />)}
+        {isAdmin ||
+          [...posts]
+            .filter((post) => post.isApproved == true)
+            .reverse()
+            .map((post, index) => <Post key={index} {...post} />)}
       </div>
       <aside className="rightSide">
         <Trending />

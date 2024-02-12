@@ -1,6 +1,6 @@
 .main {
   &__fakeInputForm {
-    width: clamp(300px, 85%, 1000px);
+    width: clamp(300px, 85%, 800px);
     // height: 150px;
     background-color: var(--component-background);
     border: 2px solid var(--border);
@@ -94,7 +94,7 @@
   }
 
   &__post {
-    width: clamp(300px, 85%, 1000px);
+    width: clamp(300px, 85%, 800px);
     background-color: var(--component-background);
     // border: 2px solid var(--border);
     border-radius: 10px;
@@ -151,6 +151,12 @@
         font-size: rem(25);
         @extend .flexAlign;
         gap: 10px;
+
+        .notApproved {
+          color: rgb(155, 155, 0);
+          font-size: 15px;
+          font-weight: $bold;
+        }
 
         .postBookMark {
           @media (max-width: 600px) {
