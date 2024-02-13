@@ -49,6 +49,9 @@ const Post = ({
     if (comment == "") {
       return;
     }
+    if (currentUserId == "") {
+      return;
+    }
 
     addComment();
   };
