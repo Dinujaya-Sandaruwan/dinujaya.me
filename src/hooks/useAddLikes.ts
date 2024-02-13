@@ -19,28 +19,36 @@ const useAddLikes = ({ likeCount, postId }: Props) => {
   const [like, setLike] = React.useState(likeCount);
   const [liked, setLiked] = React.useState(false);
   const { userName, userId, photoURL } = useAuthStore();
+  const [liking, setLiking] = React.useState(false);
 
   React.useEffect(() => {
-    const handleLike = async () => {
+    const checkLikedPost = async () => {
       try {
-        const postDocRef = doc(db, "posts", postId);
-        const docSnapshot = await getDoc(postDocRef);
+        const userDocRef = doc(db, "users", userId);
+        const docSnapshot = await getDoc(userDocRef);
 
         if (docSnapshot.exists()) {
-          const currentLikes = docSnapshot.data()?.likes || 0;
-          setLike(currentLikes);
-          setLiked(currentLikes > 0);
+          const likedPosts = docSnapshot.data()?.likedPosts || [];
+          const isLiked = likedPosts.includes(postId);
+          setLiked(isLiked);
         }
       } catch (error) {
-        console.log(error);
+        console.error("Error checking liked post:", error);
       }
     };
 
-    handleLike();
-  }, [postId]);
+    checkLikedPost();
+  }, [postId, userId]);
 
   const addLike = async () => {
+    setLiking(true);
     setLiked((prev) => !prev);
+    if (liked) {
+      setLike((prev) => prev + -1);
+    } else {
+      setLike((prev) => prev + 1);
+    }
+
     try {
       const postDocRef = doc(db, "posts", postId);
       const userDocRef = doc(db, "users", userId);
@@ -70,7 +78,7 @@ const useAddLikes = ({ likeCount, postId }: Props) => {
         });
 
         // Use the functional form of setLike to ensure it's based on the latest state
-        setLike((prev) => prev + 1);
+        // setLike((prev) => prev + 1);
       } else {
         // Update post likes
         await updateDoc(postDocRef, { likes: like - 1 });
@@ -81,15 +89,18 @@ const useAddLikes = ({ likeCount, postId }: Props) => {
         });
 
         // Use the functional form of setLike to ensure it's based on the latest state
-        setLike((prev) => prev - 1);
+        // setLike((prev) => prev - 1);
       }
     } catch (error) {
       console.error("Error updating like count:", error);
       // If an error occurs, revert the liked state to its previous value
       setLiked((prev) => !prev);
+      setLike(likeCount);
+    } finally {
+      setLiking(false);
     }
   };
-  return { addLike, like, liked };
+  return { addLike, like, liked, liking };
 };
 
 export default useAddLikes;

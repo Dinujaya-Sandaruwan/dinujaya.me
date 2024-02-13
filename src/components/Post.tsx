@@ -69,7 +69,7 @@ const Post = ({
   };
 
   // Likes
-  const { like, addLike, liked } = useAddLikes({
+  const { like, addLike, liked, liking } = useAddLikes({
     likeCount: likes,
     postId: postId,
   });
@@ -196,26 +196,27 @@ const Post = ({
         )}
       </div>
       <div className="postButtons">
-        <div
+        <button
           className="like"
           onClick={addLike}
+          disabled={liking}
           style={liked ? { color: "var(--logoBlue)" } : {}}
         >
           <AiFillLike />
           <span>Like</span>
           <span className="pstAlat">{like}</span>
-        </div>
-        <div className="comment">
+        </button>
+        <button className="comment">
           <AiOutlineComment />
           <label htmlFor="postComments">comment</label>
 
           <span className="pstAlat">{comments.length}</span>
-        </div>
-        <div className="share" onClick={() => toast("Comming soon 😁")}>
+        </button>
+        <button className="share" onClick={() => toast("Comming soon 😁")}>
           <PiShareDuotone />
           <span>Share</span>
           <span className="pstAlat">12</span>
-        </div>
+        </button>
       </div>
       <hr className="postDevider" />
       <div className="postCommentInput">

@@ -292,6 +292,9 @@
         font-size: rem(16);
 
         transition-duration: 300ms;
+        background: transparent;
+        border: none;
+        color: var(--grayText);
 
         @media (max-width: 600px) {
           font-size: rem(14);
