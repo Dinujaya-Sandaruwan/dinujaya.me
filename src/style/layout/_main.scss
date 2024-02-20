@@ -1,0 +1,463 @@
+.main {
+  &__fakeInputForm {
+    width: clamp(300px, 85%, 800px);
+    // height: 150px;
+    background-color: var(--component-background);
+    border: 2px solid var(--border);
+    border-radius: 10px;
+
+    margin-top: 40px;
+    padding: 15px;
+
+    .topSide {
+      @extend .flexAlign;
+      img {
+        width: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
+      input {
+        width: calc(100% - 50px);
+        padding: 15px;
+        border-radius: 20px;
+        border: none;
+        background-color: var(--itemBg);
+        font-size: rem(15);
+        color: var(--grayText);
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
+    .bottumSide {
+      @extend .flexAlign;
+      justify-content: space-between;
+      margin-top: 25px;
+
+      @media (max-width: 630px) {
+        justify-content: end;
+      }
+
+      .icons {
+        color: var(--grayText);
+        display: flex;
+        gap: 15px;
+        font-size: rem(30);
+
+        @media (max-width: 630px) {
+          display: none;
+        }
+      }
+
+      .buttons {
+        @extend .flexAlign;
+        gap: 10px;
+        button {
+          width: 100px;
+          height: 40px;
+          border: none;
+          font-size: rem(16);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          cursor: pointer;
+          transition-duration: 300ms;
+        }
+
+        .draft {
+          background: transparent;
+          color: var(--grayText);
+
+          *:nth-child(1) {
+            margin-right: 10px;
+          }
+        }
+
+        .draft:hover {
+          color: var(--white);
+        }
+
+        .post {
+          background-color: var(--body-background);
+          color: var(--white);
+          border: 2px solid var(--border);
+          border-radius: 10px;
+        }
+        .post:hover {
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
+
+  &__post {
+    width: clamp(300px, 85%, 800px);
+    background-color: var(--component-background);
+    // border: 2px solid var(--border);
+    border-radius: 10px;
+
+    margin-top: 20px;
+    padding: 15px;
+    margin-bottom: 20px;
+
+    .postAccount {
+      @extend .flexAlign;
+      justify-content: space-between;
+
+      .mainRight {
+        @extend .flexAlign;
+        gap: 10px;
+        img {
+          width: 40px;
+          border-radius: 50%;
+          margin-right: 0px;
+        }
+
+        .name {
+          h3 {
+            color: var(--white);
+            font-size: rem(17);
+            font-weight: $medium;
+          }
+        }
+        .tagLine {
+          font-size: rem(12);
+          @extend .flexAlign;
+          letter-spacing: 1px;
+          margin-top: 3px;
+          //   font-weight: $medium;
+
+          .time {
+            color: var(--grayText);
+            @extend .flexAlign;
+            margin-right: 3px;
+
+            *:nth-child(1) {
+              margin-right: 8px;
+              font-size: 12px;
+            }
+          }
+          .vanue {
+            color: var(--white);
+          }
+        }
+      }
+
+      .mainLeft {
+        color: var(--grayText);
+        font-size: rem(25);
+        @extend .flexAlign;
+        gap: 10px;
+
+        .notApproved {
+          color: rgb(155, 155, 0);
+          font-size: 15px;
+          font-weight: $bold;
+        }
+
+        .postBookMark {
+          @media (max-width: 600px) {
+            display: none;
+          }
+        }
+
+        .postApprove {
+          color: rgb(0, 179, 0);
+          cursor: pointer;
+          margin-right: 15px;
+        }
+
+        .postDelete {
+          cursor: pointer;
+          font-size: rem(30);
+
+          &:hover {
+            color: rgb(252, 73, 73);
+          }
+        }
+      }
+    }
+
+    .postCaption {
+      color: var(--white);
+      margin-top: 15px;
+      font-size: rem(15);
+
+      a {
+        color: var(--logoBlue);
+      }
+      span {
+        color: var(--logoBlue);
+      }
+
+      @media (max-width: 600px) {
+        font-size: rem(13);
+      }
+    }
+
+    .read-more {
+      // font-weight: $bold;
+      color: var(--grayText);
+      display: inline-block;
+      width: 100%;
+      text-align: right;
+      font-size: rem(15);
+      margin-top: -15px;
+      cursor: pointer;
+
+      @media (max-width: 600px) {
+        font-size: rem(13);
+      }
+    }
+
+    .postImages {
+      margin: 15px -15px 0px -15px;
+      position: relative;
+      max-height: 500px;
+      overflow: hidden;
+
+      @keyframes progress {
+        0% {
+          background-position: -200px 0;
+        }
+        100% {
+          background-position: calc(200px + 100%) 0;
+        }
+      }
+
+      .react-loading-skeleton {
+        animation: progress 1.2s ease-in-out infinite;
+        background-color: var(--body-background);
+        background-image: linear-gradient(
+          90deg,
+          var(--body-background),
+          var(--component-background),
+          var(--body-background)
+        );
+        background-size: 500px 100%;
+        background-repeat: no-repeat;
+      }
+
+      img {
+        z-index: 2;
+      }
+
+      .test {
+        z-index: 1;
+
+        height: 500px;
+        width: 500px;
+        border-radius: 4px;
+        display: inline-block;
+        line-height: 1;
+        width: 100%;
+      }
+
+      .imageLength {
+        @extend .flexAlign;
+        justify-content: center;
+
+        position: absolute;
+        top: 10px;
+        right: 10px;
+
+        background-color: var(--component-background);
+        border-radius: 5px;
+        color: var(--white);
+        padding: 5px 10px;
+        font-size: rem(15);
+        @media (max-width: 600px) {
+          font-size: rem(13);
+        }
+
+        * {
+          margin-inline: 5px;
+        }
+      }
+
+      .imageViewer {
+        z-index: 3;
+        position: fixed;
+      }
+    }
+
+    .postButtons {
+      @extend .flexAlign;
+      justify-content: space-around;
+      color: var(--grayText);
+      margin-top: 20px;
+
+      .like,
+      .comment,
+      .share {
+        @extend .flexAlign;
+        gap: 5px;
+        font-size: rem(16);
+
+        transition-duration: 300ms;
+        background: transparent;
+        border: none;
+        color: var(--grayText);
+
+        @media (max-width: 600px) {
+          font-size: rem(14);
+        }
+
+        *:nth-child(1) {
+          font-size: rem(22);
+
+          @media (max-width: 600px) {
+            font-size: rem(20);
+          }
+        }
+
+        .pstAlat {
+          @extend .alat;
+          @media (max-width: 400px) {
+            display: none;
+          }
+        }
+      }
+
+      .like:hover,
+      .comment:hover,
+      .share:hover {
+        cursor: pointer;
+        color: var(--white);
+      }
+
+      label:hover {
+        cursor: pointer;
+      }
+    }
+
+    .postDevider {
+      width: calc(100% + 30px);
+      height: 1px;
+      background-color: var(--border);
+      margin: 20px -15px 20px -15px;
+      opacity: 20%;
+    }
+
+    .postCommentInput {
+      @extend .flexAlign;
+      img {
+        width: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
+
+      .inputBox {
+        width: calc(100% - 50px);
+        height: 40px;
+        padding: 15px;
+        border-radius: 20px;
+        background-color: var(--itemBg);
+
+        @extend .flexAlign;
+        justify-content: space-between;
+
+        input {
+          background-color: var(--itemBg);
+          border: none;
+          color: var(--grayText);
+          font-size: rem(16);
+          width: 75%;
+        }
+
+        input:focus {
+          outline: none;
+          border: none;
+        }
+
+        .submitComment {
+          height: 38px;
+          width: 100px;
+          border-radius: 20px;
+          border: 2px solid var(--itemBg);
+          color: var(--grayText);
+          background-color: var(--body-background);
+          margin-right: -20px;
+          transition-duration: 300ms;
+        }
+        .submitComment:hover {
+          cursor: pointer;
+          color: var(--white);
+        }
+      }
+    }
+
+    .postComments {
+      margin-top: 20px;
+
+      .commentsNav {
+        @extend .flexAlign;
+        justify-content: space-between;
+        font-size: rem(15);
+
+        @media (max-width: 600px) {
+          font-size: rem(13);
+        }
+
+        .commentsNavLeft {
+          @extend .flexAlign;
+          color: var(--white);
+          opacity: 70%;
+          cursor: pointer;
+          *:nth-child(1) {
+            margin-left: 10px;
+          }
+
+          -webkit-user-select: none;
+          -khtml-user-select: none;
+          -moz-user-select: -moz-none;
+          -o-user-select: none;
+          user-select: none;
+        }
+
+        .commentsNavright {
+          @extend .flexAlign;
+
+          *:nth-child(1) {
+            margin-right: 10px;
+          }
+
+          .white {
+            color: var(--white);
+          }
+
+          .gray {
+            color: var(--grayText);
+          }
+        }
+      }
+
+      .allComents {
+        display: flex;
+        align-items: flex-start;
+        margin-top: 15px;
+        img {
+          width: 30px;
+          border-radius: 50%;
+          margin-right: 10px;
+        }
+
+        p {
+          color: var(--white);
+          font-size: rem(15);
+
+          .userName {
+            font-weight: $bold;
+            color: var(--white);
+          }
+          @media (max-width: 600px) {
+            font-size: rem(13);
+          }
+        }
+      }
+    }
+  }
+}

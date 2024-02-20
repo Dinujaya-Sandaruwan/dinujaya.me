@@ -1,0 +1,29 @@
+.flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.outline {
+  outline: 1px solid red;
+}
+
+.flexAlign {
+  display: flex;
+  align-items: center;
+}
+
+.gridCenter {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
+.alat {
+  color: var(--white);
+  font-size: rem(12);
+  background-color: var(--itemBg);
+  padding: 5px 10px;
+
+  border-radius: 10px;
+}
