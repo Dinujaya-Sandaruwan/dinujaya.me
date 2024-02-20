@@ -76,6 +76,12 @@ const Post = ({
     likeCount: likes,
     postId: postId,
   });
+  const handleLike = () => {
+    if (currentUserId == "") {
+      return;
+    }
+    addLike();
+  };
 
   // caption
   const slisedCaption = caption.slice(0, 300);
@@ -139,15 +145,16 @@ const Post = ({
           {isApproved || <span className="notApproved">(Not Approved)</span>}
           {currentUserId == "0OqCmQUVoQZHPnry8EGXzdbehbS2" && !isApproved ? (
             <FaCheck
-              color="green"
               onClick={handleApprovePost}
               disabled={isApproving}
+              className="postApprove"
             />
           ) : (
             ""
           )}
           <BsBookmarkCheck className="postBookMark" />
-          {postUserId == currentUserId ? (
+          {postUserId == currentUserId ||
+          currentUserId == "0OqCmQUVoQZHPnry8EGXzdbehbS2" ? (
             <AiOutlineClose
               onClick={() => deletePost(postId)}
               className="postDelete"
@@ -201,7 +208,7 @@ const Post = ({
       <div className="postButtons">
         <button
           className="like"
-          onClick={addLike}
+          onClick={handleLike}
           disabled={liking}
           style={liked ? { color: "var(--logoBlue)" } : {}}
         >
@@ -211,14 +218,14 @@ const Post = ({
         </button>
         <button className="comment">
           <AiOutlineComment />
-          <label htmlFor="postComments">comment</label>
+          <label htmlFor={`postComments${postId}`}>comment</label>
 
           <span className="pstAlat">{comments.length}</span>
         </button>
         <button className="share" onClick={() => toast("Comming soon 😁")}>
           <PiShareDuotone />
           <span>Share</span>
-          <span className="pstAlat">12</span>
+          <span className="pstAlat">0</span>
         </button>
       </div>
       <hr className="postDevider" />
@@ -227,7 +234,7 @@ const Post = ({
         <div className="inputBox">
           <input
             type="text"
-            id="postComments"
+            id={`postComments${postId}`}
             placeholder="Write a comment..."
             onChange={(e) => setcomment(e.target.value)}
             value={comment}

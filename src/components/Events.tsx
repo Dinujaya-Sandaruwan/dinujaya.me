@@ -16,7 +16,7 @@ const Events = () => {
         <span>12</span>
       </div>
       {eventVisibility &&
-        arr.map((item, index) => (
+        arr.map((index) => (
           <div className="eventItem" key={index}>
             <div className="eventIcon">
               <h3>20</h3>

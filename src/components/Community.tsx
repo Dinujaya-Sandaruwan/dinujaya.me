@@ -4,7 +4,7 @@ import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import groups from "../json/groups.json";
 
 const Community = () => {
-  const [groupsVisibility, setGroupsVisibility] = useState(false);
+  const [groupsVisibility, setGroupsVisibility] = useState(true);
   const handleGroupsVisibility = () => {
     setGroupsVisibility(!groupsVisibility);
   };
