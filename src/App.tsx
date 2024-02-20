@@ -32,7 +32,7 @@ function App() {
   const [posts, setposts] = useState([] as Posts[]);
   const postCollectionRef = collection(db, "posts");
 
-  const isAdmin = userId == "0OqCmQUVoQZHPnry8EGXzdbehbS2";
+  const isAdmin = userId == import.meta.env.VITE_USER_ID;
 
   useEffect(() => {
     const unsubscribe = onSnapshot(postCollectionRef, (snapshot) => {

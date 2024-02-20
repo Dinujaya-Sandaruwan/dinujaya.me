@@ -35,6 +35,8 @@ const Post = ({
 
   const [comment, setcomment] = useState("");
 
+  const AdminUserId = import.meta.env.VITE_USER_ID;
+
   const clearComment = () => {
     setcomment("");
   };
@@ -143,7 +145,7 @@ const Post = ({
         </div>
         <div className="mainLeft">
           {isApproved || <span className="notApproved">(Not Approved)</span>}
-          {currentUserId == "0OqCmQUVoQZHPnry8EGXzdbehbS2" && !isApproved ? (
+          {currentUserId == AdminUserId && !isApproved ? (
             <FaCheck
               onClick={handleApprovePost}
               disabled={isApproving}
@@ -153,8 +155,7 @@ const Post = ({
             ""
           )}
           <BsBookmarkCheck className="postBookMark" />
-          {postUserId == currentUserId ||
-          currentUserId == "0OqCmQUVoQZHPnry8EGXzdbehbS2" ? (
+          {postUserId == currentUserId || currentUserId == AdminUserId ? (
             <AiOutlineClose
               onClick={() => deletePost(postId)}
               className="postDelete"
