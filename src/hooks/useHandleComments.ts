@@ -1,7 +1,8 @@
-import { doc, updateDoc, arrayUnion } from "firebase/firestore";
+import { doc, updateDoc, arrayUnion, getDoc } from "firebase/firestore";
 import { db } from "../firebase/config";
-import useAuthStore from "../global/authStore";
 import { useState } from "react";
+import useAuthStore from "../global/authStore";
+import useDocId from "./useDocId";
 
 interface Props {
   postId: string;
@@ -11,11 +12,13 @@ interface Props {
 
 const useAddComments = ({ postId, comment, clearComment }: Props) => {
   const [commentLoading, setcommentLoading] = useState(false);
+  const commentId = useDocId("comment");
   const {
     userName: currentUserName,
     photoURL: CurrentUserPhotoURL,
     userId,
   } = useAuthStore();
+
   const addComment = async () => {
     setcommentLoading(true);
     try {
@@ -26,6 +29,7 @@ const useAddComments = ({ postId, comment, clearComment }: Props) => {
         userName: currentUserName,
         userPhotoURL: CurrentUserPhotoURL,
         userId: userId,
+        commentId: commentId,
         comment: comment,
       };
 
@@ -42,7 +46,32 @@ const useAddComments = ({ postId, comment, clearComment }: Props) => {
     setcommentLoading(false);
     clearComment();
   };
-  return { addComment, commentLoading };
+
+  const deleteComment = async (postId: string, commentId: string) => {
+    try {
+      const postDocRef = doc(db, "posts", postId);
+
+      // Retrieve the current post document
+      const postDocSnap = await getDoc(postDocRef);
+      if (postDocSnap.exists()) {
+        const postData = postDocSnap.data();
+
+        // Filter out the comment with the given commentId
+        const updatedComments = postData.comments.filter(
+          (comment: any) => comment.commentId !== commentId
+        );
+
+        // Update the Firestore document with the updated comments array
+        await updateDoc(postDocRef, {
+          comments: updatedComments,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return { addComment, deleteComment, commentLoading };
 };
 
 export default useAddComments;

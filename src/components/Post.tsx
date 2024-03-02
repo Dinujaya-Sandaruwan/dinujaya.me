@@ -1,9 +1,10 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { AiFillLike, AiOutlineComment } from "react-icons/ai";
 
 import { BsBookmarkCheck, BsClock, BsThreeDotsVertical } from "react-icons/bs";
 import { PiShareDuotone } from "react-icons/pi";
 import { FaChevronDown, FaChevronUp, FaCheck } from "react-icons/fa";
+import { PiShareFatLight } from "react-icons/pi";
 import { FaImages } from "react-icons/fa6";
 import { AiOutlineClose } from "react-icons/ai";
 import { toast } from "react-toastify";
@@ -13,9 +14,13 @@ import { Posts } from "../interfaces/postFaces";
 import useDeletePost from "../hooks/useDeletePost";
 
 import useAuthStore from "../global/authStore";
-import useAddComments from "../hooks/useAddComments";
+import useHandleComments from "../hooks/useHandleComments";
 import useAddLikes from "../hooks/useAddLikes";
 import useApprovePost from "../hooks/useApprovePost";
+
+import { Menu, MenuItem, MenuButton, SubMenu } from "@szhsin/react-menu";
+import "@szhsin/react-menu/dist/index.css";
+import "@szhsin/react-menu/dist/transitions/slide.css";
 
 const Post = ({
   userName,
@@ -32,6 +37,7 @@ const Post = ({
 }: Posts) => {
   const { deletePost } = useDeletePost();
   const { userId: currentUserId, photoURL: currentPhotoURL } = useAuthStore();
+  const isAdmin = currentUserId == import.meta.env.VITE_USER_ID;
 
   const [comment, setcomment] = useState("");
 
@@ -41,7 +47,7 @@ const Post = ({
     setcomment("");
   };
 
-  const { addComment, commentLoading } = useAddComments({
+  const { addComment, commentLoading, deleteComment } = useHandleComments({
     postId,
     comment,
     clearComment,
@@ -221,7 +227,7 @@ const Post = ({
           <AiOutlineComment />
           <label htmlFor={`postComments${postId}`}>comment</label>
 
-          <span className="pstAlat">{comments.length}</span>
+          <span className="pstAlat">{comments?.length}</span>
         </button>
         <button className="share" onClick={() => toast("Comming soon 😁")}>
           <PiShareDuotone />
@@ -271,8 +277,35 @@ const Post = ({
                 />
                 <p>
                   <span className="userName">{comment.userName}:</span> &nbsp;
-                  {comment.comment}
+                  <span className="comment">{comment.comment}</span>
                 </p>
+                {currentUserId == comment.userId && isAdmin ? (
+                  <span className="menuIcon">
+                    <Menu
+                      menuButton={
+                        <MenuButton>
+                          <BsThreeDotsVertical />
+                        </MenuButton>
+                      }
+                      menuClassName="commentMenu"
+                    >
+                      <MenuItem
+                        className="commentMenuItem"
+                        onClick={() => toast("Comming soon 😁")}
+                      >
+                        Reply
+                      </MenuItem>
+                      <MenuItem
+                        className="commentMenuItem"
+                        onClick={() => deleteComment(postId, comment.commentId)}
+                      >
+                        Delete
+                      </MenuItem>
+                    </Menu>
+                  </span>
+                ) : (
+                  <span className="menuIcon"></span>
+                )}
               </div>
             ))
           : [...comments]
@@ -289,6 +322,36 @@ const Post = ({
                     <span className="userName">{comment.userName}:</span> &nbsp;
                     {comment.comment}
                   </p>
+
+                  {currentUserId == comment.userId && isAdmin ? (
+                    <span className="menuIcon">
+                      <Menu
+                        menuButton={
+                          <MenuButton>
+                            <BsThreeDotsVertical />
+                          </MenuButton>
+                        }
+                        menuClassName="commentMenu"
+                      >
+                        <MenuItem
+                          className="commentMenuItem"
+                          onClick={() => toast("Comming soon 😁")}
+                        >
+                          Reply
+                        </MenuItem>
+                        <MenuItem
+                          className="commentMenuItem"
+                          onClick={() =>
+                            deleteComment(postId, comment.commentId)
+                          }
+                        >
+                          Delete
+                        </MenuItem>
+                      </Menu>
+                    </span>
+                  ) : (
+                    <span className="menuIcon"></span>
+                  )}
                 </div>
               ))}
       </div>

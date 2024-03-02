@@ -22,7 +22,7 @@ const RealInputForm = () => {
   const [loading, setloading] = useState(false);
   const postCollectionRef = collection(db, "posts");
 
-  const docID = useDocId();
+  const docID = useDocId("post");
 
   const [imagesArray, setImagesArray] = useState<FileList | null>(null);
 
