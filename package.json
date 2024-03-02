@@ -17,6 +17,7 @@
     "firebase": "^10.3.1",
     "image-compressor.js": "^1.1.4",
     "react": "^18.2.0",
+    "react-burger-menu": "^3.0.9",
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",
     "react-loading-skeleton": "^3.3.1",
@@ -27,6 +28,7 @@
   "devDependencies": {
     "@types/dompurify": "^3.0.5",
     "@types/react": "^18.2.15",
+    "@types/react-burger-menu": "^2.8.7",
     "@types/react-dom": "^18.2.7",
     "@types/uuid": "^9.0.3",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
