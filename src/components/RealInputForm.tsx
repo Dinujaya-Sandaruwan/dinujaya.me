@@ -8,8 +8,8 @@ import useAuthStore from "../global/authStore";
 import useDate from "../hooks/useDate";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
-import ImageCompressor from "image-compressor.js";
 import DOMPurify from "dompurify";
+import Compressor from "compressorjs";
 
 const RealInputForm = () => {
   const realForm = useRef<HTMLDivElement>(null);
@@ -18,7 +18,6 @@ const RealInputForm = () => {
   const { userName, photoURL, userId } = useAuthStore();
   const addedDate = useDate();
   const [caption, setcaption] = useState("");
-
   const [loading, setloading] = useState(false);
   const postCollectionRef = collection(db, "posts");
 
@@ -27,14 +26,14 @@ const RealInputForm = () => {
   const [imagesArray, setImagesArray] = useState<FileList | null>(null);
 
   const uploadPosts = async () => {
-    const urls = [];
+    const urls: string[] = [];
     if (imagesArray) {
       for (let i = 0; i < imagesArray.length; i++) {
-        // Use image-compressor.js to compress the image before uploading
+        // Use Compressor.js to compress the image before uploading
         const compressedImage = await compressImage(imagesArray[i]);
 
         const uploadTask = ref(storage, `postImages/postImg_${v4()}`);
-        const snapshot = await uploadBytes(uploadTask, compressedImage as File);
+        const snapshot = await uploadBytes(uploadTask, compressedImage);
         const url = await getDownloadURL(snapshot.ref);
         urls.push(url);
       }
@@ -68,16 +67,16 @@ const RealInputForm = () => {
     return DOMPurify.sanitize(captionWithLineBreaks);
   };
 
-  const compressImage = (image: File) => {
-    return new Promise((resolve) => {
-      new ImageCompressor(image, {
-        quality: 0.2,
+  const compressImage = (image: File | Blob) => {
+    return new Promise<Blob>((resolve, reject) => {
+      new Compressor(image, {
+        quality: 0.4,
         success(result) {
           resolve(result);
         },
         error(err) {
           console.error("Error compressing image:", err);
-          resolve(image);
+          reject(err);
         },
       });
     });
@@ -89,10 +88,6 @@ const RealInputForm = () => {
     try {
       const formattedCaption = await formatCaption(caption);
       const urls = await uploadPosts();
-
-      // const formatedUrls = urls.map((url) => {
-      //   return { original: url };
-      // });
 
       const postData = {
         postId: docID,
