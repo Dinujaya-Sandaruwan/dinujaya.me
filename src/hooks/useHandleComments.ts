@@ -3,6 +3,7 @@ import { db } from "../firebase/config";
 import { useState } from "react";
 import useAuthStore from "../global/authStore";
 import useDocId from "./useDocId";
+import { Comments } from "../interfaces/postFaces";
 
 interface Props {
   postId: string;
@@ -58,7 +59,7 @@ const useAddComments = ({ postId, comment, clearComment }: Props) => {
 
         // Filter out the comment with the given commentId
         const updatedComments = postData.comments.filter(
-          (comment: any) => comment.commentId !== commentId
+          (comment: Comments) => comment.commentId !== commentId
         );
 
         // Update the Firestore document with the updated comments array

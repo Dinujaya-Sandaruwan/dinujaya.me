@@ -9,6 +9,8 @@ interface Repo {
   commitCount: number;
   lastCommitDate: string;
   repoLink: string;
+  html_url: string;
+  full_name: string;
 }
 
 const Trending: FC = () => {
@@ -30,7 +32,7 @@ const Trending: FC = () => {
 
         // Get commit details for all repositories with a delay
         const reposWithCommits = await Promise.all(
-          response.data.map(async (repo: any) => {
+          response.data.map(async (repo: Repo) => {
             // Introduce a delay (e.g., 1000 milliseconds) before fetching commit details
             await new Promise((resolve) => setTimeout(resolve, 1000));
 

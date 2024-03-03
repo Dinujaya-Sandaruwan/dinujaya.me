@@ -1,4 +1,4 @@
-interface Comments {
+export interface Comments {
   userName: string;
   userPhotoURL: string;
   userId: string;

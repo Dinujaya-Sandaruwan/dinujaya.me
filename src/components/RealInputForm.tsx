@@ -119,10 +119,10 @@ const RealInputForm = () => {
     return () => {
       document.removeEventListener("click", handleOutside, true);
     };
-  }, []);
+  }); // Remove the dependency array
 
-  const handleOutside = (e: any) => {
-    if (!realForm.current?.contains(e.target)) {
+  const handleOutside = (e: MouseEvent) => {
+    if (!realForm.current?.contains(e.target as Node)) {
       setDisplayForm(false);
     }
   };

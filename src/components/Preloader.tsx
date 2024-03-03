@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Lottie from "react-lottie-player";
 import lottieJson from "./../assets/preloader.json";
 

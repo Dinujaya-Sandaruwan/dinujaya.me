@@ -1,10 +1,9 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { AiFillLike, AiOutlineComment } from "react-icons/ai";
 
 import { BsBookmarkCheck, BsClock, BsThreeDotsVertical } from "react-icons/bs";
 import { PiShareDuotone } from "react-icons/pi";
 import { FaChevronDown, FaChevronUp, FaCheck } from "react-icons/fa";
-import { PiShareFatLight } from "react-icons/pi";
 import { FaImages } from "react-icons/fa6";
 import { AiOutlineClose } from "react-icons/ai";
 import { toast } from "react-toastify";
@@ -18,7 +17,7 @@ import useHandleComments from "../hooks/useHandleComments";
 import useAddLikes from "../hooks/useAddLikes";
 import useApprovePost from "../hooks/useApprovePost";
 
-import { Menu, MenuItem, MenuButton, SubMenu } from "@szhsin/react-menu";
+import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
 
