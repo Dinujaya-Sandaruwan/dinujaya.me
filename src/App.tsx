@@ -23,7 +23,6 @@ import useDisplayForm from "./global/displayFormStore";
 import { Posts } from "./interfaces/postFaces";
 
 import { slide as Menu } from "react-burger-menu";
-import "./test.css";
 
 // import Skeleton from "react-loading-skeleton";
 // import "react-loading-skeleton/dist/skeleton.css";
@@ -57,7 +56,7 @@ function App() {
     return () => unsubscribe();
   }, []);
 
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   // const showSettings = (event) => {
   //   event.preventDefault();
   //   // Your logic here
