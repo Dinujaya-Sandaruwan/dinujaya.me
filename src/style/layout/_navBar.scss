@@ -15,6 +15,10 @@
       font-size: rem(20);
       margin-right: 5px;
     }
+
+    @media screen and (max-width: 980px) {
+      display: none;
+    }
   }
 
   &__topMenu {

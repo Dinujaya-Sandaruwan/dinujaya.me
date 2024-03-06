@@ -1,0 +1,215 @@
+/* Position and sizing of burger button */
+.bm-burger-button {
+  position: fixed;
+  width: 34px;
+  height: 28px;
+  left: 36px;
+  top: 22px;
+  z-index: 1000;
+
+  @media screen and (min-width: 601px) {
+    display: none;
+  }
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: var(--white);
+}
+
+/* Color/shape of burger icon bars on hover*/
+.bm-burger-bars-hover {
+  background: var(--white);
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: var(--grayText);
+}
+
+/*
+    Sidebar wrapper styles
+    Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+*/
+.bm-menu-wrap {
+  top: 0;
+  left: 0;
+  position: absolute;
+  height: 100%;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background-color: var(--component-background);
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
+  z-index: 1000;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.mobileMenu {
+  .leftSide__mainLogo {
+    @extend .flexAlign;
+    margin-bottom: 40px;
+
+    background-color: var(--component-background);
+
+    .logo {
+      @extend .flexCenter;
+      color: var(--white);
+      font-size: rem(30);
+      background-color: var(--logoBlue);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+
+    .logoText {
+      color: var(--logoBlue);
+      margin-left: 10px;
+      font-size: rem(25);
+      display: inline;
+
+      // @media (max-width: 1350px) {
+      //   display: none;
+      // }
+    }
+  }
+
+  .leftSide__searchBox {
+    width: 100%;
+    height: 50px;
+    background-color: var(--itemBg);
+    border: 2px solid var(--border);
+    border-radius: 5px;
+    // margisn-top: 20px;
+
+    @extend .flexAlign;
+    color: var(--grayText);
+    padding: 10px;
+
+    // @media (max-width: 1350px) {
+    //   justify-content: center;
+    // }
+
+    *:nth-child(1) {
+      font-size: rem(25);
+    }
+
+    *:nth-child(2) {
+      font-size: rem(15);
+      background-color: var(--itemBg);
+      border: none;
+      margin-left: 10px;
+      color: var(--grayText);
+      display: inline;
+      width: 100%;
+
+      //   @media (max-width: 1350px) {
+      //     display: none;
+      //   }
+    }
+
+    *:nth-child(2):focus {
+      border: none;
+      outline: none;
+    }
+
+    ::-webkit-input-placeholder {
+      /* Chrome/Opera/Safari */
+      color: var(--grayText);
+    }
+    ::-moz-placeholder {
+      /* Firefox 19+ */
+      color: var(--grayText);
+    }
+    :-ms-input-placeholder {
+      /* IE 10+ */
+      color: var(--grayText);
+    }
+    :-moz-placeholder {
+      /* Firefox 18- */
+      color: var(--grayText);
+    }
+  }
+
+  .leftSide__sideMenu {
+    margin-top: 40px;
+    margin-bottom: 30px;
+    .menuItem {
+      @extend .flexAlign;
+      padding: 12px 15px;
+      margin-bottom: 15px;
+      transition-duration: 300ms;
+      border-radius: 5px;
+      cursor: pointer;
+      *:nth-child(1) {
+        color: var(--grayText);
+        font-size: rem(25);
+      }
+
+      * {
+        transition-duration: 300ms;
+      }
+
+      .itemTitle {
+        color: var(--grayText);
+        margin-left: 10px;
+        font-size: rem(16);
+        display: inline;
+      }
+    }
+
+    .menuItem:nth-child(1) {
+      background-color: var(--itemBg);
+
+      border-radius: 5px;
+      *:nth-child(1) {
+        color: var(--logoBlue);
+      }
+
+      .itemTitle {
+        color: var(--logoBlue);
+        font-weight: $medium;
+      }
+    }
+
+    .menuItem:nth-child(3) {
+      justify-content: space-between;
+      div {
+        @extend .flexAlign;
+      }
+
+      .menuAlat {
+        @extend .alat;
+        margin-right: -15px;
+      }
+
+      @media (max-width: 1350px) {
+        .menuAlat {
+          display: none;
+        }
+      }
+    }
+
+    .menuItem:hover {
+      background-color: var(--itemBg);
+      * {
+        color: var(--white);
+      }
+    }
+  }
+  .fadedLine {
+    background-color: var(--grayText);
+    opacity: 20%;
+    height: 0.5px;
+    border: none;
+  }
+}

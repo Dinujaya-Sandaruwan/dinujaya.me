@@ -1,0 +1,38 @@
+.preloader {
+  background-color: var(--body-background);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100000000000;
+  //   opacity: 0;
+  pointer-events: none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  animation: preloader 300ms 3s forwards;
+
+  & > * {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background-color: var(--component-background);
+  }
+}
+
+@keyframes preloader {
+  from {
+    opacity: 100%;
+    transform: scale(1.2);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+body.loading {
+  overflow: hidden;
+}

@@ -1,8 +1,9 @@
-interface Comments {
+export interface Comments {
   userName: string;
   userPhotoURL: string;
   userId: string;
   comment: string;
+  commentId: string;
 }
 
 export interface Posts {
