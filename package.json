@@ -20,6 +20,7 @@
     "react-burger-menu": "^3.0.9",
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",
+    "react-infinite-scroll-component": "^6.1.0",
     "react-loading-skeleton": "^3.3.1",
     "react-simple-image-viewer": "^1.2.2",
     "uuid": "^9.0.0",
