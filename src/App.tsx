@@ -28,7 +28,6 @@ import useAuthStore from "./global/authStore";
 import useDisplayForm from "./global/displayFormStore";
 import { Posts } from "./interfaces/postFaces";
 import { slide as Menu } from "react-burger-menu";
-import InfiniteScroll from "react-infinite-scroll-component";
 
 function App() {
   const { displayForm } = useDisplayForm();
@@ -39,9 +38,7 @@ function App() {
   const [lastPost, setLastPost] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [hasMore, setHasMore] = useState<boolean>(true);
-  const [showLoadButton, setShowLoadButton] = useState<boolean>(true);
   const observer = useRef<IntersectionObserver | null>(null);
-  // const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const isAdmin = userId === import.meta.env.VITE_USER_ID;
 
@@ -133,21 +130,12 @@ function App() {
         setLastPost(snapshot.docs[snapshot.docs.length - 1]);
       } else {
         setHasMore(false);
-        setShowLoadButton(false); // Hide the load more button when no more posts
       }
       setLoading(false);
     }
   };
 
-  const handleLoadMorePosts = () => {
-    fetchMorePosts();
-  };
-
   const [isOpen, setIsOpen] = useState(false);
-  // const showSettings = (event) => {
-  //   event.preventDefault();
-  //   // Your logic here
-  // };
 
   return (
     <main>
@@ -184,21 +172,13 @@ function App() {
               (post) => post.userId === userId && post.isApproved === false
             )
             .map((post, index) => <Post key={index} {...post} />)}
-        <InfiniteScroll
-          dataLength={posts.filter((post) => post.isApproved === true).length} //This is important field to render the next data
-          next={handleLoadMorePosts}
-          hasMore={true}
-          loader={showLoadButton ? <h4>Loading...</h4> : <h4></h4>}
-          // below props only if you need pull down functionality
-          refreshFunction={handleLoadMorePosts}
-          pullDownToRefresh
-          pullDownToRefreshThreshold={5}
-        >
-          {!isAdmin &&
-            posts
-              .filter((post) => post.isApproved === true)
-              .map((post, index) => <Post key={index} {...post} />)}
-        </InfiniteScroll>
+        {/* Render posts */}
+        {!isAdmin &&
+          posts
+            .filter((post) => post.isApproved === true)
+            .map((post, index) => <Post key={index} {...post} />)}
+        {/* Loader */}
+        {loading && <h4>Loading...</h4>}
       </div>
       <aside className="rightSide">
         <Trending />

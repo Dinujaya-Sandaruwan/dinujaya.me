@@ -510,3 +510,18 @@
     }
   }
 }
+
+.infinite-scroll-component {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+
+  & > * {
+    width: clamp(300px, 85%, 800px);
+    @media (width > 1700px) {
+      width: 800px;
+    }
+  }
+}

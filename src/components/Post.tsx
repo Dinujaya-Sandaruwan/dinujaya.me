@@ -21,6 +21,8 @@ import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
 
+import ContentLoader from "react-content-loader";
+
 const Post = ({
   userName,
   userPhotoURL,
@@ -188,9 +190,15 @@ const Post = ({
             width="100%"
           />
         ) : (
-          <div className="react-loading-skeleton">
-            <div className="test"></div>
-          </div>
+          <ContentLoader
+            speed={2}
+            height={0}
+            viewBox="0 0 200 200"
+            backgroundColor="#f3f3f3"
+            foregroundColor="#ecebeb"
+          >
+            <rect x="0" y="0" rx="5" ry="5" width="200" height="200" />
+          </ContentLoader>
         )}
 
         {postPhotoURL.length > 1 && (
@@ -211,6 +219,7 @@ const Post = ({
           </div>
         )}
       </div>
+
       <div className="postButtons">
         <button
           className="like"
