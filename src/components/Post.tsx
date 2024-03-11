@@ -237,7 +237,7 @@ const Post = ({
 
           <span className="pstAlat">{comments?.length}</span>
         </button>
-        <button className="share" onClick={() => toast("Comming soon 😁")}>
+        <button className="share" onClick={() => toast.info("Comming soon 😁")}>
           <PiShareDuotone />
           <span>Share</span>
           <span className="pstAlat">0</span>

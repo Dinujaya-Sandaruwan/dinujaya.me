@@ -80,6 +80,7 @@
 
       background-color: var(--itemBg);
       font-size: rem(20);
+      cursor: pointer;
 
       @media (max-width: 1015px) {
         display: none;

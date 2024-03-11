@@ -32,6 +32,10 @@ import { Posts } from "./interfaces/postFaces";
 import { slide as Menu } from "react-burger-menu";
 import InfiniteScroll from "react-infinite-scroll-component";
 
+import "react-modal-video/scss/modal-video.scss";
+import ModalVideo from "react-modal-video";
+import useInfoVideoStore from "./global/infoVideoStore";
+
 function App() {
   const { displayForm } = useDisplayForm();
   const { userName, userId } = useAuthStore();
@@ -44,6 +48,7 @@ function App() {
   const [showLoadButton, setShowLoadButton] = useState<boolean>(true);
   const observer = useRef<IntersectionObserver | null>(null);
   // const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { isVideoOpen, setVideoOpen } = useInfoVideoStore();
 
   const isAdmin = userId === import.meta.env.VITE_USER_ID;
 
@@ -153,6 +158,14 @@ function App() {
 
   return (
     <main>
+      <ModalVideo
+        channel="youtube"
+        youtube={{ mute: 0, autoplay: 0 }}
+        isOpen={isVideoOpen}
+        videoId="1gokns2iMFo"
+        onClose={() => setVideoOpen(false)}
+      />
+
       <Menu isOpen={isOpen} onStateChange={(state) => setIsOpen(state.isOpen)}>
         <span className="mobileMenu">
           <MainLogo />
@@ -190,7 +203,7 @@ function App() {
           dataLength={posts.filter((post) => post.isApproved === true).length} //This is important field to render the next data
           next={handleLoadMorePosts}
           hasMore={true}
-          loader={showLoadButton ? <h4>Loading...</h4> : <h4></h4>}
+          loader={showLoadButton ? <h4></h4> : <h4></h4>}
           // below props only if you need pull down functionality
           refreshFunction={handleLoadMorePosts}
           pullDownToRefresh

@@ -1,29 +1,30 @@
 import { useState } from "react";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
+import data from "../json/todoList.json";
 
 const Events = () => {
   const [eventVisibility, setEventVisibility] = useState(true);
   const handleEventVisibility = () => {
     setEventVisibility(!eventVisibility);
   };
-  const arr = [1, 2, 3];
+
   return (
     <div className="leftSide__events">
       <div className="eventsNav">
         <p onClick={handleEventVisibility}>
           Dinu's todo list {eventVisibility ? <FaAngleDown /> : <FaAngleUp />}
         </p>
-        <span>12</span>
+        <span>0{data.length}</span>
       </div>
       {eventVisibility &&
-        arr.map((index) => (
+        data.map(({ date, title }, index) => (
           <div className="eventItem" key={index}>
             <div className="eventIcon">
-              <h3>20</h3>
-              <p>Dec</p>
+              <h3>{date.day}</h3>
+              <p>{date.month}</p>
             </div>
             <div className="eventText">
-              <h3>Product Designer...</h3>
+              <h3>{title.substring(0, 15)}...</h3>
               <p>78K interested - 7.7K going</p>
             </div>
           </div>

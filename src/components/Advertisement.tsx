@@ -10,9 +10,11 @@ const Advertisement = () => {
           I'm your one-person army, armed with the skills to transform your web
           aspirations into stunning, functional reality!
         </p>
-        <button className="hireMe">
-          <TbBrandFiverr /> Hire now
-        </button>
+        <a href="https://wa.me/+94764588828" target="_blank">
+          <button className="hireMe">
+            <TbBrandFiverr /> Hire now
+          </button>
+        </a>
       </div>
     </div>
   );
