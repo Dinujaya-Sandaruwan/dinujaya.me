@@ -35,6 +35,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import "react-modal-video/scss/modal-video.scss";
 import ModalVideo from "react-modal-video";
 import useInfoVideoStore from "./global/infoVideoStore";
+import SignOutModel from "./components/SignOutModel";
 
 function App() {
   const { displayForm } = useDisplayForm();

@@ -1,0 +1,52 @@
+.signOutBackground {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  .signOutModel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background-color: var(--component-background);
+    width: clamp(300px, 70%, 700px);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+
+    padding: 25px;
+
+    h3 {
+      font-size: 22px;
+    }
+    p {
+      font-size: 14px;
+      margin-top: 16px;
+      color: var(--grayText);
+    }
+
+    .signOutButtions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      button {
+        width: 45%;
+        height: 40px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      .cancelButton {
+        background-color: var(--itemBg);
+        color: var(--white);
+      }
+      .signOutButton {
+        background-color: var(--deleteRed);
+        color: var(--white);
+      }
+    }
+  }
+}
