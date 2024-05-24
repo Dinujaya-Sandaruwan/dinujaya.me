@@ -22,6 +22,7 @@ import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
 
 import ContentLoader from "react-content-loader";
+import PostDeleteModel from "./PostDeleteModel";
 
 const Post = ({
   userName,
@@ -134,8 +135,17 @@ const Post = ({
     }
   };
 
+  const [isDeletePostModelOpen, setIsDeletePostModelOpen] = useState(false);
+
   return (
     <div className="main__post">
+      {isDeletePostModelOpen && (
+        <PostDeleteModel
+          isDeletePostModelOpen={isDeletePostModelOpen}
+          setIsDeletePostModelOpen={setIsDeletePostModelOpen}
+          postId={postId}
+        />
+      )}
       <div className="postAccount">
         <div className="mainRight">
           <img src={userPhotoURL} alt="" />
@@ -164,7 +174,7 @@ const Post = ({
           <BsBookmarkCheck className="postBookMark" />
           {postUserId == currentUserId || currentUserId == AdminUserId ? (
             <AiOutlineClose
-              onClick={() => deletePost(postId)}
+              onClick={() => setIsDeletePostModelOpen(true)}
               className="postDelete"
             />
           ) : (
