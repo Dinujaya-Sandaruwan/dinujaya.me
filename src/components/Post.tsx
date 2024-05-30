@@ -286,8 +286,14 @@ const Post = ({
       <div className="postComments">
         <div className="commentsNav">
           <div className="commentsNavLeft" onClick={toggleShowMoreComments}>
-            {showMoreComments ? "Show less comments" : "Show more comments"}
-            {showMoreComments ? <FaChevronUp /> : <FaChevronDown />}
+            {comments.length === 0 ? (
+              "No comments"
+            ) : (
+              <>
+                {showMoreComments ? "Show less comments" : "Show more comments"}
+                {showMoreComments ? <FaChevronUp /> : <FaChevronDown />}
+              </>
+            )}
           </div>
           <div className="commentsNavright">
             <span className="gray">Sort by</span>
