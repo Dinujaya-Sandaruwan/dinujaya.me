@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { AiFillLike, AiOutlineComment } from "react-icons/ai";
 
 import { BsBookmarkCheck, BsClock, BsThreeDotsVertical } from "react-icons/bs";
@@ -37,16 +37,14 @@ const Post = ({
   isApproved,
 }: Posts) => {
   const { userId: currentUserId, photoURL: currentPhotoURL } = useAuthStore();
+
   const isAdmin = currentUserId == import.meta.env.VITE_USER_ID;
 
+  // Handle Comments
   const [comment, setcomment] = useState("");
-
-  const AdminUserId = import.meta.env.VITE_USER_ID;
-
   const clearComment = () => {
     setcomment("");
   };
-
   const { addComment, commentLoading, deleteComment } = useHandleComments({
     postId,
     comment,
@@ -54,16 +52,9 @@ const Post = ({
   });
 
   const handleComment = () => {
-    if (comment == "") {
-      return;
-    }
-    if (currentUserId == "") {
-      return;
-    }
-
+    if (!comment || !currentUserId) return;
     addComment();
   };
-
   const submitComment = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       handleComment();
@@ -71,7 +62,6 @@ const Post = ({
   };
 
   const [showMoreComments, setShowMoreComments] = useState(false);
-
   const toggleShowMoreComments = () => {
     if (comments.length <= 3) {
       return;
@@ -92,8 +82,26 @@ const Post = ({
   };
 
   // caption
-  const slisedCaption = caption.slice(0, 300);
-  const [displaySeeMore, setDisplaySeeMore] = useState(true);
+  const firstSegment = caption.split(/<br\s*\/?>/i)[0];
+  const wordLimit = 30;
+  const captionWords = firstSegment.split(" ");
+
+  const [slicedCaption, setSlicedCaption] = useState("");
+
+  useEffect(() => {
+    if (captionWords.length > wordLimit) {
+      const slicedCaptionWords =
+        captionWords.slice(0, wordLimit).join(" ") + "...";
+      setSlicedCaption(slicedCaptionWords);
+    } else {
+      setSlicedCaption(firstSegment);
+    }
+  }, []);
+
+  const [displaySeeMore, setDisplaySeeMore] = useState(false);
+  useEffect(() => {
+    if (caption.split(" ").length > wordLimit) setDisplaySeeMore(true);
+  }, []);
 
   const captionRef = useRef<HTMLDivElement>(null);
   const showFullCaption = () => {
@@ -104,7 +112,6 @@ const Post = ({
   };
 
   // Image Viewer
-
   const [currentImage, setCurrentImage] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
 
@@ -119,7 +126,6 @@ const Post = ({
   };
 
   // Approve Post
-
   const approvePost = useApprovePost({ postId });
   const [isApproving, setIsApproving] = useState(false);
   const handleApprovePost = async () => {
@@ -163,7 +169,7 @@ const Post = ({
         </div>
         <div className="mainLeft">
           {isApproved || <span className="notApproved">(Not Approved)</span>}
-          {currentUserId == AdminUserId && !isApproved ? (
+          {isAdmin && !isApproved ? (
             <button
               onClick={handleApprovePost}
               disabled={isApproving}
@@ -175,7 +181,7 @@ const Post = ({
             ""
           )}
           <BsBookmarkCheck className="postBookMark" />
-          {postUserId == currentUserId || currentUserId == AdminUserId ? (
+          {postUserId == currentUserId || isAdmin ? (
             <AiOutlineClose
               onClick={() => setIsDeletePostModelOpen(true)}
               className="postDelete"
@@ -187,10 +193,10 @@ const Post = ({
       </div>
       <div
         className="postCaption"
-        dangerouslySetInnerHTML={{ __html: slisedCaption }}
+        dangerouslySetInnerHTML={{ __html: slicedCaption }}
         ref={captionRef}
       />
-      {caption.length > 300 && displaySeeMore && (
+      {displaySeeMore && (
         <span className="read-more" onClick={showFullCaption}>
           ...see more
         </span>
