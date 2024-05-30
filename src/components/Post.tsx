@@ -3,7 +3,12 @@ import { AiFillLike, AiOutlineComment } from "react-icons/ai";
 
 import { BsBookmarkCheck, BsClock, BsThreeDotsVertical } from "react-icons/bs";
 import { PiShareDuotone } from "react-icons/pi";
-import { FaChevronDown, FaChevronUp, FaCheck } from "react-icons/fa";
+import {
+  FaChevronDown,
+  FaChevronUp,
+  FaCheck,
+  FaCommentDots,
+} from "react-icons/fa";
 import { FaImages } from "react-icons/fa6";
 import { AiOutlineClose } from "react-icons/ai";
 import { toast } from "react-toastify";
@@ -287,7 +292,9 @@ const Post = ({
         <div className="commentsNav">
           <div className="commentsNavLeft" onClick={toggleShowMoreComments}>
             {comments.length === 0 ? (
-              "No comments"
+              <>
+                <FaCommentDots /> &nbsp; No comments
+              </>
             ) : (
               <>
                 {showMoreComments ? "Show less comments" : "Show more comments"}
