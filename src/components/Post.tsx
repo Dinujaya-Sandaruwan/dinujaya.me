@@ -144,6 +144,7 @@ const Post = ({
           isDeletePostModelOpen={isDeletePostModelOpen}
           setIsDeletePostModelOpen={setIsDeletePostModelOpen}
           postId={postId}
+          postImages={postPhotoURL}
         />
       )}
       <div className="postAccount">

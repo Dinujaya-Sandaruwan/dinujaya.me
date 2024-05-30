@@ -6,13 +6,18 @@ interface Props {
   isDeletePostModelOpen: boolean;
   setIsDeletePostModelOpen: React.Dispatch<React.SetStateAction<boolean>>;
   postId: string;
+  postImages: string[];
 }
 
-const PostDeleteModel = ({ setIsDeletePostModelOpen, postId }: Props) => {
+const PostDeleteModel = ({
+  setIsDeletePostModelOpen,
+  postId,
+  postImages,
+}: Props) => {
   const { deletePost } = useDeletePost();
 
   const handleDeletePost = () => {
-    deletePost(postId)
+    deletePost(postId, postImages)
       .then(() => {
         setIsDeletePostModelOpen(false);
       })
