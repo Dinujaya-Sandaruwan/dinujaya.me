@@ -137,6 +137,8 @@ const Post = ({
 
   const [isDeletePostModelOpen, setIsDeletePostModelOpen] = useState(false);
 
+  if (postPhotoURL === null) postPhotoURL = [];
+
   return (
     <div className="main__post">
       {isDeletePostModelOpen && (
