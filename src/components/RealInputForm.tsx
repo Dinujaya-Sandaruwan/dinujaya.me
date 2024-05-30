@@ -1,16 +1,14 @@
+import DOMPurify from "dompurify";
+import { collection, doc, setDoc } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
 import { BiSolidCloudUpload } from "react-icons/bi";
-import useDisplayForm from "../global/displayFormStore";
-import { collection, doc, setDoc } from "firebase/firestore";
-import { db, storage } from "../firebase/config";
-import useDocId from "../hooks/useDocId";
+import { db } from "../firebase/config";
 import useAuthStore from "../global/authStore";
+import useDisplayForm from "../global/displayFormStore";
 import useDate from "../hooks/useDate";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { v4 } from "uuid";
-import DOMPurify from "dompurify";
+import useDocId from "../hooks/useDocId";
 
-import compressImage from "../hooks/posts/useCompresImage";
+import uploadImages from "../hooks/posts/useUploadImages";
 
 const RealInputForm = () => {
   const realForm = useRef<HTMLDivElement>(null);
@@ -25,22 +23,6 @@ const RealInputForm = () => {
   const docID = useDocId("post");
 
   const [imagesArray, setImagesArray] = useState<FileList | null>(null);
-
-  const uploadPosts = async () => {
-    const urls: string[] = [];
-    if (imagesArray) {
-      for (let i = 0; i < imagesArray.length; i++) {
-        // Use Compressor.js to compress the image before uploading
-        const compressedImage = await compressImage(imagesArray[i]);
-
-        const uploadTask = ref(storage, `postImages/postImg_${v4()}`);
-        const snapshot = await uploadBytes(uploadTask, compressedImage);
-        const url = await getDownloadURL(snapshot.ref);
-        urls.push(url);
-      }
-    }
-    return urls;
-  };
 
   const formatCaption = (caption: string) => {
     // Caption
@@ -73,7 +55,7 @@ const RealInputForm = () => {
 
     try {
       const formattedCaption = await formatCaption(caption);
-      const urls = await uploadPosts();
+      const urls = await uploadImages(imagesArray);
 
       const postData = {
         postId: docID,
