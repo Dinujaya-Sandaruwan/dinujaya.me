@@ -9,7 +9,8 @@ import useDate from "../hooks/useDate";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
 import DOMPurify from "dompurify";
-import Compressor from "compressorjs";
+
+import compressImage from "../hooks/posts/useCompresImage";
 
 const RealInputForm = () => {
   const realForm = useRef<HTMLDivElement>(null);
@@ -65,21 +66,6 @@ const RealInputForm = () => {
 
     // Use DOMPurify to sanitize the HTML content
     return DOMPurify.sanitize(captionWithLineBreaks);
-  };
-
-  const compressImage = (image: File | Blob) => {
-    return new Promise<Blob>((resolve, reject) => {
-      new Compressor(image, {
-        quality: 0.4,
-        success(result) {
-          resolve(result);
-        },
-        error(err) {
-          console.error("Error compressing image:", err);
-          reject(err);
-        },
-      });
-    });
   };
 
   const onSubmitPost = async () => {
