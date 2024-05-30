@@ -10,7 +10,6 @@ import { toast } from "react-toastify";
 import ImageViewer from "react-simple-image-viewer";
 
 import { Posts } from "../interfaces/postFaces";
-import useDeletePost from "../hooks/useDeletePost";
 
 import useAuthStore from "../global/authStore";
 import useHandleComments from "../hooks/useHandleComments";
@@ -37,7 +36,6 @@ const Post = ({
   comments,
   isApproved,
 }: Posts) => {
-  const { deletePost } = useDeletePost();
   const { userId: currentUserId, photoURL: currentPhotoURL } = useAuthStore();
   const isAdmin = currentUserId == import.meta.env.VITE_USER_ID;
 
@@ -165,11 +163,13 @@ const Post = ({
         <div className="mainLeft">
           {isApproved || <span className="notApproved">(Not Approved)</span>}
           {currentUserId == AdminUserId && !isApproved ? (
-            <FaCheck
+            <button
               onClick={handleApprovePost}
               disabled={isApproving}
               className="postApprove"
-            />
+            >
+              <FaCheck />
+            </button>
           ) : (
             ""
           )}
